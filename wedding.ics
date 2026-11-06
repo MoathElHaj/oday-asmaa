@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Oday Asmaa//Wedding//AR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:oday-asmaa-20261210@wedding
+DTSTAMP:20261106T000000Z
+DTSTART:20261210T160000Z
+DTEND:20261210T210000Z
+SUMMARY:زفاف عدي & أسماء · Oday & Asmaa Düğünü
+LOCATION:İNCİ Düğün Salonu\, Başakşehir Mah. Hürriyet Bulvarı No: 
+ 76 (Azizan Restaurant Üstü 5. Kat)\, Başakşehir / İstanbul
+DESCRIPTION:الاستقبال 7:00 مساءً · Karşılama 19:00\nhttps:
+ //maps.app.goo.gl/pshaHFvhGFTZqBgW9
+URL:https://maps.app.goo.gl/pshaHFvhGFTZqBgW9
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:غداً زفاف عدي وأسماء 🤍 · Yarın Oday & Asm
+ aa'nın düğünü
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT3H
+DESCRIPTION:زفاف عدي وأسماء بعد 3 ساعات · Düğüne 3
+  saat kaldı
+END:VALARM
+END:VEVENT
+END:VCALENDAR

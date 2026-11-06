@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#ece6dd">
+<title>لوحة الردود · عدي & أسماء</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@500&family=Noto+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ebe5dc;--paper:#f7f3ed;--ink:#4f4034;--soft:#8a7a6b;--gold:#b4975f;--gold-d:#94784a;--line:rgba(180,151,95,.4);--yes:#5f8a5a;--no:#b0645a}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans Arabic",system-ui,sans-serif;font-variant-numeric:lining-nums tabular-nums;min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:calc(20px + env(safe-area-inset-top)) 16px 40px}
+header{text-align:center;margin-bottom:22px}
+header h1{font-family:Amiri,serif;font-size:30px;color:var(--gold-d)}
+header p{color:var(--soft);font-size:14px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px -14px rgba(110,90,60,.3)}
+/* login */
+.login{max-width:360px;margin:12vh auto 0;padding:28px 22px;text-align:center}
+.login h1{font-family:Amiri,serif;color:var(--gold-d);font-size:26px;margin-bottom:6px}
+.login p{color:var(--soft);font-size:14px;margin-bottom:18px}
+input[type=password],input[type=search]{width:100%;border:1px solid var(--line);background:#fffdf9;border-radius:8px;padding:12px 14px;font:16px inherit;font-family:inherit;color:var(--ink);outline:none}
+input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(180,151,95,.18)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:8px 18px;border-radius:30px;border:1px solid var(--gold);background:linear-gradient(180deg,#c3a56d,var(--gold-d));color:#fff;font:600 15px inherit;font-family:inherit;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.ghost{background:transparent;color:var(--gold-d)}
+.btn:disabled{opacity:.6}
+.login .btn{width:100%;margin-top:12px}
+.err{color:var(--no);font-size:14px;min-height:20px;margin-top:10px}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat{padding:16px 10px;text-align:center}
+.stat b{display:block;font:500 32px/1.15 "Playfair Display",serif;color:var(--gold-d)}
+.stat span{font-size:13px;color:var(--soft)}
+.stat.yes b{color:var(--yes)} .stat.no b{color:var(--no)}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+/* toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px;margin-bottom:12px}
+.toolbar input{flex:1 1 200px}
+.seg{display:flex;border:1px solid var(--line);border-radius:30px;padding:3px;background:#fffdf9}
+.seg button{border:0;background:none;padding:7px 14px;border-radius:30px;font:500 14px inherit;font-family:inherit;color:var(--soft);cursor:pointer}
+.seg button.on{background:var(--gold);color:#fff}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+/* list */
+.list{overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{font-weight:600;font-size:13px;color:var(--soft);text-align:start;padding:12px;border-bottom:1px solid var(--line);background:#f2ece3}
+td{padding:12px;border-bottom:1px solid rgba(180,151,95,.15);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:13px;font-weight:600}
+.tag.yes{background:rgba(95,138,90,.12);color:var(--yes)} .tag.no{background:rgba(176,100,90,.12);color:var(--no)}
+.muted{color:var(--soft);font-size:13px}
+.del{border:0;background:none;color:var(--soft);cursor:pointer;font-size:18px;padding:4px 8px;border-radius:6px}
+.del:hover{color:var(--no);background:rgba(176,100,90,.08)}
+.empty{padding:40px 16px;text-align:center;color:var(--soft)}
+@media (max-width:640px){
+  thead{display:none}
+  table,tbody,tr,td{display:block;width:100%}
+  tr{display:grid;grid-template-columns:auto auto 1fr auto;gap:4px 14px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(180,151,95,.18)}
+  td{padding:0;border:0}
+  td.c-name{grid-column:1/4;font-weight:600;font-size:16px}
+  td.c-status{grid-row:1;grid-column:4;text-align:end}
+  td.c-count,td.c-lang,td.c-time{grid-row:2;font-size:13px;color:var(--soft)}
+  td.c-del{grid-row:2;grid-column:4;text-align:end}
+}
+.foot{text-align:center;color:var(--soft);font-size:12px;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- login -->
+  <form class="panel login" id="login">
+    <h1>عدي & أسماء</h1>
+    <p>لوحة متابعة ردود الضيوف</p>
+    <input type="password" id="pw" placeholder="كلمة السر" autocomplete="current-password" required>
+    <button class="btn" id="login-btn">دخول</button>
+    <p class="err" id="login-err"></p>
+  </form>
+
+  <!-- dashboard -->
+  <div id="dash" hidden>
+    <header>
+      <h1>ردود الضيوف</h1>
+      <p id="updated">—</p>
+    </header>
+
+    <div class="stats">
+      <div class="panel stat"><b id="s-guests">0</b><span>إجمالي الحاضرين</span></div>
+      <div class="panel stat yes"><b id="s-yes">0</b><span>ردود تأكيد</span></div>
+      <div class="panel stat no"><b id="s-no">0</b><span>اعتذارات</span></div>
+      <div class="panel stat"><b id="s-all">0</b><span>كل الردود</span></div>
+    </div>
+
+    <div class="panel toolbar">
+      <input type="search" id="q" placeholder="بحث بالاسم…">
+      <div class="seg" id="filter">
+        <button data-f="all" class="on">الكل</button>
+        <button data-f="yes">سيحضر</button>
+        <button data-f="no">معتذر</button>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" id="refresh">تحديث</button>
+        <button class="btn" id="csv">تحميل Excel</button>
+        <a class="btn ghost" id="sheet" target="_blank" rel="noopener" hidden>فتح Google Sheet</a>
+      </div>
+    </div>
+
+    <div class="panel list">
+      <table>
+        <thead><tr><th>الاسم</th><th>الحالة</th><th>العدد</th><th>اللغة</th><th>آخر تحديث</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="empty" hidden>لا توجد ردود بعد</div>
+    </div>
+    <p class="foot">تتحدث القائمة تلقائياً كل دقيقة · <a href="#" id="logout" style="color:inherit">تسجيل الخروج</a></p>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script>
+const API = (window.SITE && window.SITE.rsvpEndpoint) || '';
+const $ = s => document.querySelector(s);
+let key = '', rows = [], filter = 'all', timer;
+const ss = { get(){ try{ return sessionStorage.getItem('adm') || ''; }catch(e){ return ''; } }, set(v){ try{ v ? sessionStorage.setItem('adm', v) : sessionStorage.removeItem('adm'); }catch(e){} } };
+const esc = s => String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = iso => { const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleString('ar', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit', numberingSystem:'latn'}); };
+
+if (window.SITE && window.SITE.sheetUrl) { $('#sheet').href = window.SITE.sheetUrl; $('#sheet').hidden = false; }
+
+async function call(body){
+  if(!API) throw new Error('لم يتم ضبط رابط السيرفر في config.js بعد');
+  const r = await fetch(API, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({...body, key})});
+  const j = await r.json();
+  if(!j.ok) throw new Error(j.error === 'auth' ? 'كلمة السر غير صحيحة' : 'حدث خطأ، حاول مرة أخرى');
+  return j;
+}
+
+async function load(){
+  $('#refresh').disabled = true;
+  try{
+    const j = await call({action:'list'});
+    rows = j.rows.sort((a,b)=> new Date(b.updated) - new Date(a.updated));
+    render();
+    $('#updated').textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString('ar', {hour:'2-digit', minute:'2-digit', numberingSystem:'latn'});
+    return true;
+  } finally { $('#refresh').disabled = false; }
+}
+
+function render(){
+  const yes = rows.filter(r=>r.attending), no = rows.filter(r=>!r.attending);
+  $('#s-guests').textContent = yes.reduce((n,r)=>n + r.count, 0);
+  $('#s-yes').textContent = yes.length; $('#s-no').textContent = no.length; $('#s-all').textContent = rows.length;
+  const q = $('#q').value.trim().toLowerCase();
+  const view = rows.filter(r => (filter==='all' || (filter==='yes') === r.attending) && (!q || r.name.toLowerCase().includes(q)));
+  $('#rows').innerHTML = view.map(r => `<tr>
+    <td class="c-name">${esc(r.name)}${r.edits ? ` <span class="muted">(عُدّل ${r.edits})</span>` : ''}</td>
+    <td class="c-status"><span class="tag ${r.attending?'yes':'no'}">${r.attending?'سيحضر':'معتذر'}</span></td>
+    <td class="c-count">${r.attending ? r.count + ' <span class="muted">شخص</span>' : '—'}</td>
+    <td class="c-lang">${esc(r.lang)}</td>
+    <td class="c-time">${fmt(r.updated)}</td>
+    <td class="c-del"><button class="del" data-id="${esc(r.deviceId)}" title="حذف">×</button></td></tr>`).join('');
+  $('#empty').hidden = view.length > 0;
+}
+
+$('#login').addEventListener('submit', async e => {
+  e.preventDefault();
+  key = $('#pw').value; $('#login-err').textContent = ''; $('#login-btn').disabled = true;
+  try{ await load(); ss.set(key); showDash(); }
+  catch(err){ $('#login-err').textContent = err.message; }
+  finally{ $('#login-btn').disabled = false; }
+});
+function showDash(){ $('#login').hidden = true; $('#dash').hidden = false; clearInterval(timer); timer = setInterval(()=>load().catch(()=>{}), 60000); }
+
+$('#refresh').addEventListener('click', ()=>load().catch(err=>alert(err.message)));
+$('#q').addEventListener('input', render);
+$('#filter').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return; filter = b.dataset.f; document.querySelectorAll('#filter button').forEach(x=>x.classList.toggle('on', x===b)); render(); });
+$('#rows').addEventListener('click', async e => {
+  const b = e.target.closest('.del'); if(!b) return;
+  const r = rows.find(x=>x.deviceId === b.dataset.id);
+  if(!r || !confirm('حذف رد «' + r.name + '» نهائياً؟')) return;
+  try{ await call({action:'delete', deviceId:r.deviceId}); await load(); }catch(err){ alert(err.message); }
+});
+$('#csv').addEventListener('click', () => {
+  const head = ['الاسم','الحالة','عدد الحضور','اللغة','آخر تحديث'];
+  const q = v => '"' + String(v).replace(/"/g,'""') + '"';
+  const lines = [head, ...rows.map(r=>[r.name, r.attending?'سيحضر':'معتذر', r.count, r.lang, fmt(r.updated)])].map(l=>l.map(q).join(','));
+  const blob = new Blob(['﻿' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});   // BOM so Excel shows Arabic correctly
+  const a = Object.assign(document.createElement('a'), {href:URL.createObjectURL(blob), download:'ردود-زفاف-عدي-وأسماء.csv'});
+  document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+});
+$('#logout').addEventListener('click', e => { e.preventDefault(); ss.set(''); location.reload(); });
+
+// stay signed in for this browser tab
+(async()=>{ const saved = ss.get(); if(!saved) return; key = saved; try{ await load(); showDash(); }catch(e){ ss.set(''); } })();
+</script>
+</body>
+</html>

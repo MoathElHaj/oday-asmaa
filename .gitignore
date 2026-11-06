@@ -1,0 +1,6 @@
+.claude/
+.DS_Store
+# private: server code (has the dashboard password) and internal guides
+google-apps-script/
+SETUP-AR.md
+CLIENT-AR.md
