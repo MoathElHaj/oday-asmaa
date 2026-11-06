@@ -248,7 +248,7 @@ html[data-lang=tr] .cd small{font-family:var(--lat);font-size:15px}
 .cd-msg{margin-top:14px;font-size:18px;color:var(--sage-d);font-weight:700;min-height:1px}
 .soon .cd div{animation:glow 2s ease-in-out infinite}
 @keyframes glow{50%{box-shadow:0 0 0 1px var(--gold),0 0 0 4px #fff,0 0 18px 4px rgba(179,147,82,.45)}}
-.remind{margin-top:24px;padding-top:20px;border-top:1px dashed var(--line)}
+.remind{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
 .remind h3{font-family:var(--ar-d);font-size:21px;font-weight:700;color:var(--ink)}
 html[data-lang=tr] .remind h3{font-family:var(--lat);font-weight:600;font-size:23px}
 .remind p{font-size:16.5px;color:var(--soft);line-height:1.85}
@@ -281,7 +281,9 @@ html[data-lang=tr] .field input{font-family:var(--lat);font-size:18px}
 .rsvp-msg{min-height:0;font-size:14px;color:#a5544a;margin:-4px 0}
 .rsvp-msg:empty{display:none}
 .rsvp-done{display:none;margin-top:18px;padding:20px;border:1px solid var(--line);border-radius:8px;background:#fff}
-.rsvp-done p{font-size:19px;color:var(--sage-d);font-weight:700;line-height:1.7}
+.rsvp-done .remind p{font-size:16px;font-weight:400;color:var(--soft);line-height:1.8}
+html[data-lang=tr] .rsvp-done .remind p{font-size:18px}
+.rsvp-done > p{font-size:19px;color:var(--sage-d);font-weight:700;line-height:1.7}
 .rsvp-done button{margin-top:8px;border:0;background:none;color:var(--soft);text-decoration:underline;font:14px var(--ar);cursor:pointer}
 .answered .rsvp-form{display:none}
 .answered .rsvp-done{display:block}
@@ -431,7 +433,7 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
     <img class="corner r" src="assets/corner-r.webp" alt="">
   </section>
 
-  <!-- ===== Countdown + reminder ===== -->
+  <!-- ===== Countdown ===== -->
   <section class="sheet rv" id="countdown">
     <div class="inner">
       <img class="sprig" src="assets/bouquet.webp" alt="">
@@ -444,17 +446,6 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
         <div><b id="cd-s">00</b><small><span class="t-ar">ثانية</span><span class="t-tr">Saniye</span></small></div>
       </div>
       <p class="cd-msg" id="cd-msg"></p>
-      <div class="remind">
-        <h3><span class="t-ar">ذكّرني قبل الحفل بيوم</span><span class="t-tr" lang="tr">Bir gün önce hatırlat</span></h3>
-        <p><span class="t-ar">أضف الموعد إلى تقويم جوالك ليصلك تنبيه قبل الحفل بيوم وقبله بثلاث ساعات.</span><span class="t-tr" lang="tr">Düğünden bir gün ve üç saat önce bildirim almak için takviminize ekleyin.</span></p>
-        <div class="btn-row">
-          <a class="btn" href="wedding.ics" download="Oday-Asmaa-Wedding.ics">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-            <span class="t-ar">أضف إلى التقويم</span><span class="t-tr" lang="tr">Takvime Ekle</span>
-          </a>
-          <a class="btn ghost" id="gcal" target="_blank" rel="noopener">Google Calendar</a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -489,7 +480,20 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
           <button class="btn ghost" data-v="no"><span class="t-ar">الاعتذار عن الحضور</span><span class="t-tr">Katılım Sağlayamayacağım</span></button>
         </div>
       </div>
-      <div class="rsvp-done"><p id="r-done"></p><button id="r-change"><span class="t-ar">تغيير الرد</span><span class="t-tr">Yanıtı değiştir</span></button></div>
+      <div class="rsvp-done"><p id="r-done"></p>
+        <!-- offered only after "attending": the guest has already confirmed, so leaving for a calendar app costs nothing -->
+        <div class="remind" id="after-yes" hidden>
+          <h3><span class="t-ar">📅 لا تفوّت الموعد</span><span class="t-tr" lang="tr">📅 Tarihi kaçırmayın</span></h3>
+          <p><span class="t-ar">أضف الحفل إلى تقويم جوالك ليصلك تذكير قبل الحفل بيوم وقبله بثلاث ساعات.</span><span class="t-tr" lang="tr">Düğünden bir gün ve üç saat önce hatırlatma almak için takviminize ekleyin.</span></p>
+          <div class="btn-row">
+            <a class="btn" href="wedding.ics" download="Oday-Asmaa-Wedding.ics">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+              <span class="t-ar">أضف إلى التقويم</span><span class="t-tr" lang="tr">Takvime Ekle</span>
+            </a>
+            <a class="btn ghost" id="gcal" target="_blank" rel="noopener">Google Calendar</a>
+          </div>
+        </div>
+        <button id="r-change"><span class="t-ar">تغيير الرد</span><span class="t-tr">Yanıtı değiştir</span></button></div>
     </div>
   </section>
 </main>
@@ -795,6 +799,7 @@ function renderRsvp(){
   const st = store.get('inv_rsvp');
   rsvp.classList.toggle('answered', !!st);
   if(st) $('#r-done').innerHTML = st.v==='yes' ? T[lang].yes(esc(st.name), st.count) : T[lang].no(esc(st.name));
+  $('#after-yes').hidden = !(st && st.v==='yes');
 }
 // one id per phone, so changing the answer updates the same row instead of adding a new one
 function deviceId(){
