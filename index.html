@@ -90,12 +90,22 @@ html[data-lang=tr] .invite .names-lat{font-size:min(13vw,52px)}
 .hero.done .scroll-hint{opacity:1;transition-delay:.6s}
 .scroll-hint svg{width:22px;height:22px;animation:bob 1.8s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(6px)}}
-.tap{position:absolute;inset:0;z-index:4;display:none;align-items:flex-end;justify-content:center;padding-bottom:22vh;background:none;border:0;cursor:pointer}
+/* "open the invitation" button over the closed doors — one tap starts the video AND the music
+   (phones never allow sound before the guest touches the page) */
+.tap{position:absolute;inset:0;z-index:4;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(ellipse at 50% 46%,rgba(255,252,245,.55),rgba(255,252,245,0) 60%);border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;padding:0 20px}
 .hero.needs-tap .tap{display:flex}
-.tap span{background:rgba(255,255,255,.92);color:var(--gold-d);border:1px solid var(--line);border-radius:40px;padding:10px 26px;font:500 16px var(--ar);box-shadow:0 8px 24px -10px rgba(60,70,40,.45);animation:pulse 2s ease-in-out infinite}
-.tap span b{font-weight:500}
-.tap span b[lang=tr]{font-family:var(--lat);font-size:17px;font-weight:600}
-@keyframes pulse{50%{transform:scale(1.04)}}
+.tap .seal-btn{position:relative;width:108px;height:108px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  background:radial-gradient(circle at 35% 30%,#d9bf86,#a8873f 55%,#7f6430);box-shadow:0 0 0 5px rgba(255,255,255,.85),0 0 0 6px var(--line),0 14px 30px -10px rgba(110,85,40,.7);animation:pulse 2.2s ease-in-out infinite}
+.tap .seal-btn::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px solid rgba(179,147,82,.55);animation:ring 2.2s ease-out infinite}
+.tap .seal-btn svg{width:40px;height:40px}
+.tap .lbl{background:rgba(255,255,255,.94);color:var(--gold-d);border:1px solid var(--line);border-radius:40px;padding:9px 24px;font:700 18px var(--ar-d);box-shadow:0 8px 24px -10px rgba(60,70,40,.45);line-height:1.5}
+.tap .lbl b{font-weight:700}
+.tap .lbl b[lang=tr]{font-family:var(--lat);font-size:19px;font-weight:600}
+.tap .sub{font-size:13px;color:var(--soft);background:rgba(255,255,255,.8);border-radius:20px;padding:2px 12px}
+html[data-lang=tr] .tap .sub{font-family:var(--lat);font-size:15px}
+@keyframes pulse{50%{transform:scale(1.05)}}
+@keyframes ring{0%{transform:scale(.85);opacity:1}100%{transform:scale(1.35);opacity:0}}
+.hero.needs-tap .skip{display:none}
 .skip{position:absolute;z-index:5;bottom:calc(18px + env(safe-area-inset-bottom));inset-inline-end:16px;border:0;background:rgba(255,255,255,.75);color:var(--soft);border-radius:30px;padding:6px 14px;font:13px var(--ar);cursor:pointer;transition:opacity .4s}
 .hero.done .skip{opacity:0;pointer-events:none}
 
@@ -324,7 +334,7 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
 @media (prefers-reduced-motion:reduce){
   .shadows img{animation:none}
   .rv,.hero-text > *{opacity:1!important;transform:none!important;transition:none!important}
-  .scroll-hint svg,.music.playing svg,.soon .cd div,.tap span{animation:none}
+  .scroll-hint svg,.music.playing svg,.soon .cd div,.tap .seal-btn,.tap .seal-btn::after{animation:none}
 }
 </style>
 </head>
@@ -345,7 +355,11 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
   </div>
   <div class="scroll-hint"><span class="t-ar">مرّر للأسفل</span><span class="t-tr" lang="tr">Aşağı kaydırın</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"/></svg></div>
-  <button class="tap" id="tap"><span><b class="t-ar">اضغط لفتح الدعوة</b><b class="t-tr" lang="tr">Davetiyeyi açmak için dokunun</b></span></button>
+  <button class="tap" id="tap" aria-label="افتح الدعوة · Davetiyeyi aç">
+    <span class="seal-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5h18v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/><path d="m3 7.5 9 6.5 9-6.5"/><path d="M12 4.2c-.9-1-2.6-.6-2.6.8 0 1.2 2.6 2.6 2.6 2.6s2.6-1.4 2.6-2.6c0-1.4-1.7-1.8-2.6-.8z" fill="currentColor" stroke="none"/></svg></span>
+    <span class="lbl"><b class="t-ar">اضغط لفتح الدعوة</b><b class="t-tr" lang="tr">Davetiyeyi Aç</b></span>
+    <span class="sub"><span class="t-ar">🎵 مع الموسيقى</span><span class="t-tr" lang="tr">🎵 Müzik ile</span></span>
+  </button>
   <button class="skip" id="skip"><span class="t-ar">تخطي</span><span class="t-tr">Geç</span></button>
 </section>
 
@@ -611,14 +625,22 @@ vid.addEventListener('loadedmetadata', setSpeed);
 vid.addEventListener('play', ()=>{ setSpeed(); requestAnimationFrame(syncGap); });
 vid.addEventListener('ended', reveal);
 vid.addEventListener('error', reveal);
-function startIntro(){
+// The guest opens the invitation with one tap: that tap is what lets the phone play sound,
+// so the music and the door video start together.
+function startIntro(){ hero.classList.add('needs-tap'); }
+let opened = false;
+function openInvitation(){
+  if(opened) return; opened = true;
+  hero.classList.remove('needs-tap');
+  playMusic();
+  setSpeed();
   const p = vid.play();
-  if(p && p.catch) p.catch(()=>hero.classList.add('needs-tap'));   // e.g. iPhone low-power mode blocks autoplay
+  if(p && p.catch) p.catch(reveal);              // video could not play: show the invitation directly
+  setTimeout(reveal, 9000);                       // safety net on very slow connections
 }
-$('#tap').addEventListener('click',()=>{ hero.classList.remove('needs-tap'); playMusic(); vid.play().catch(reveal); });
+$('#tap').addEventListener('click', openInvitation);
 $('#skip').addEventListener('click',()=>{ playMusic(); try{ vid.pause(); }catch(e){} reveal(); });
-if(matchMedia('(prefers-reduced-motion: reduce)').matches) reveal(); else startIntro();
-setTimeout(reveal, 15000); // safety net on very slow connections
+startIntro();
 
 /* ---------- top buttons: hide while scrolling down, show when scrolling up ---------- */
 (()=>{
