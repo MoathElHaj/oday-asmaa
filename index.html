@@ -510,6 +510,26 @@ html[data-lang=tr] .v3-notes li{font:400 13.5px/1.45 var(--bask)}
 .e-ar [lang=tr]{font:italic 400 17px/1.5 var(--bask)}
 .e-lat{font:400 min(12vw,46px)/1.2 var(--script);color:var(--bur);direction:ltr}
 .e-lat i{font:italic 400 26px var(--bask);margin:0 4px}
+/* personal invitation card shown after "attending" */
+.mycard{margin-top:16px;padding-top:16px;border-top:1px dashed rgba(90,16,36,.25)}
+.mc-title{font:700 19px/1.5 var(--names);color:var(--bur)} .mc-title [lang=tr]{font:700 17px var(--bask)}
+.mc-frame{position:relative;width:min(78%,260px);aspect-ratio:9/16;margin:12px auto 0;border-radius:14px;overflow:hidden;background:#4a0d1c;
+  box-shadow:0 0 0 1px rgba(90,16,36,.25),0 16px 30px -14px rgba(69,9,26,.7)}
+.mc-frame img{display:block;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s}
+.mc-frame img.ready{opacity:1}
+.mc-wait{position:absolute;inset:0;display:grid;place-items:center;color:#f4e7da;font:14px var(--ar)}
+.mc-frame img.ready + .mc-wait{display:none}
+/* the thank-you box styles plain buttons as text links; keep the card buttons as real buttons */
+.rsvp-done .v3-btn{margin-top:0;border:1px solid var(--bur-d);text-decoration:none;font:600 16px var(--ar);color:#fbeef0;background:linear-gradient(180deg,#6a1530,var(--bur-d))}
+.rsvp-done .v3-btn.ghost{color:var(--bur);border-color:rgba(90,16,36,.35);background:rgba(255,250,248,.8)}
+html[data-lang=tr] .rsvp-done .v3-btn{font:400 16px var(--bask)}
+.mc-actions{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.mc-actions .v3-btn{margin-top:0;padding-inline:20px}
+.v3-btn.ghost{background:rgba(255,250,248,.7);color:var(--bur);border-color:rgba(90,16,36,.35);box-shadow:none}
+.mc-cal{margin-top:16px}
+.mc-cal p{font:400 14.5px/1.7 var(--ar);color:var(--bur-s)} .mc-cal p [lang=tr]{font:400 14px var(--bask)}
+.mc-cal .btn-row{margin-top:8px;gap:8px}
+.mc-cal .v3-btn{margin-top:0;min-height:44px;padding:8px 18px;font-size:15px}
 .v3-bless,.v3-lead-tr{max-width:340px;margin-inline:auto;text-wrap:balance}
 @media (max-width:360px){
   .v3-bless{font-size:14.5px} .v3-lead-tr{font-size:15px} .v3-caps{font-size:13px;letter-spacing:1.5px}
@@ -654,16 +674,26 @@ html[data-lang=tr] .v3-notes li{font:400 13.5px/1.45 var(--bask)}
         </div>
       </div>
       <div class="rsvp-done"><p id="r-done"></p>
-        <!-- offered only after "attending": the guest has already confirmed, so leaving for a calendar app costs nothing -->
-        <div class="remind" id="after-yes" hidden>
-          <h3><span class="t-ar">📅 لا تفوّت الموعد</span><span class="t-tr" lang="tr">📅 Tarihi kaçırmayın</span></h3>
-          <p><span class="t-ar">أضف الحفل إلى تقويم جوالك ليصلك تذكير قبل الحفل بيوم وقبله بثلاث ساعات.</span><span class="t-tr" lang="tr">Düğünden bir gün ve üç saat önce hatırlatma almak için takviminize ekleyin.</span></p>
-          <div class="btn-row">
-            <a class="btn" href="wedding.ics" download="Oday-Asmaa-Wedding.ics">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-              <span class="t-ar">أضف إلى التقويم</span><span class="t-tr" lang="tr">Takvime Ekle</span>
-            </a>
-            <a class="btn ghost" id="gcal" target="_blank" rel="noopener">Google Calendar</a>
+        <!-- offered only after "attending": a personal invitation card with save / share / calendar -->
+        <div class="mycard" id="after-yes" hidden>
+          <p class="mc-title"><span class="t-ar">🎉 بطاقة دعوتك جاهزة</span><span class="t-tr" lang="tr">🎉 Davetiye kartınız hazır</span></p>
+          <div class="mc-frame"><img id="card-img" alt="بطاقة الدعوة"><span class="mc-wait" id="card-wait"><span class="t-ar">جارٍ تجهيز البطاقة…</span><span class="t-tr" lang="tr">Kart hazırlanıyor…</span></span></div>
+          <div class="mc-actions">
+            <button class="v3-btn mc-save" id="card-save" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14"/></svg>
+              <span class="t-ar">حفظ البطاقة</span><span class="t-tr" lang="tr">Kartı Kaydet</span></button>
+            <button class="v3-btn ghost mc-share" id="card-share" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4M8.2 13.2l7.6 4"/></svg>
+              <span class="t-ar">مشاركة</span><span class="t-tr" lang="tr">Paylaş</span></button>
+          </div>
+          <div class="mc-cal">
+            <p><span class="t-ar">📅 أضف الحفل لتقويمك ليصلك تذكير قبل الحفل بيوم وقبله بثلاث ساعات</span><span class="t-tr" lang="tr">📅 Bir gün ve üç saat önce hatırlatma için takviminize ekleyin</span></p>
+            <div class="btn-row">
+              <a class="v3-btn ghost" href="wedding.ics" download="Oday-Asmaa-Wedding.ics">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                <span class="t-ar">أضف إلى التقويم</span><span class="t-tr" lang="tr">Takvime Ekle</span></a>
+              <a class="v3-btn ghost" id="gcal" target="_blank" rel="noopener">Google Calendar</a>
+            </div>
           </div>
         </div>
         <button id="r-change"><span class="t-ar">تغيير الرد</span><span class="t-tr">Yanıtı değiştir</span></button></div>
@@ -681,6 +711,7 @@ html[data-lang=tr] .v3-notes li{font:400 13.5px/1.45 var(--bask)}
 </main>
 
 <script src="config.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
 /* ================= CONFIG — edit here ================= */
 const CONFIG = {
@@ -950,6 +981,139 @@ function daysBadge(){
   else el.textContent = n > 10 ? `باقي ${n} يوماً على الفرح` : n > 2 ? `باقي ${n} أيام على الفرح` : n === 2 ? 'باقي يومان على الفرح' : n === 1 ? 'الفرح غداً 🤍' : n === 0 ? 'اليوم الفرح 🤍' : 'شكراً لمشاركتكم فرحتنا 🤍';
 }
 
+/* ---------- personal invitation card (drawn on a canvas in the guest's phone) ---------- */
+// older phones (iOS < 16) have no canvas roundRect
+if(window.CanvasRenderingContext2D && !CanvasRenderingContext2D.prototype.roundRect){
+  CanvasRenderingContext2D.prototype.roundRect = function(x,y,w,h,r){ r = Math.min(r, w/2, h/2);
+    this.moveTo(x+r,y); this.arcTo(x+w,y,x+w,y+h,r); this.arcTo(x+w,y+h,x,y+h,r); this.arcTo(x,y+h,x,y,r); this.arcTo(x,y,x+w,y,r); this.closePath(); return this; };
+}
+const Card = (()=>{
+  const W = 1080, H = 1920;
+  const ROSE = '#d9a98a', CREAM = '#f4e7da', DARK = '#3a0a16';
+  const TXT = {
+    ar:{ ok:'✓  تم تأكيد حضوركم', honor:'يتشرّف بحضوركم', at:'في حفل زفاف', time:'7:00 مساءً', count:n=>`عدد الحضور: ${n}`,
+         venue:'قاعة إنجي للأفراح · İNCİ Düğün Salonu', city:'Başakşehir / İstanbul', code:c=>`رقم الدعوة: ${c}`, thanks:'بوجودكم تكتمل المسرات 🤍',
+         file:'بطاقة-دعوة-عدي-وأسماء', share:'بطاقة دعوتي لحفل زفاف عدي وأسماء 🤍' },
+    tr:{ ok:'✓  Katılımınız onaylandı', honor:'Sizi aramızda görmekten onur duyarız', at:"’nın düğününde", time:'19:00', count:n=>`Kişi sayısı: ${n}`,
+         venue:'İNCİ Düğün Salonu', city:'Başakşehir / İstanbul', code:c=>`Davetiye No: ${c}`, thanks:'Sizi bekliyoruz 🤍',
+         file:'Oday-Asmaa-davetiye', share:'Oday & Asmaa düğün davetiyem 🤍' } };
+  let bg, last = { key:'', blob:null, url:'' };
+  const loadImg = src => new Promise((ok,no)=>{ const i = new Image(); i.onload = ()=>ok(i); i.onerror = no; i.src = src; });
+  async function fonts(){
+    const f = ['700 80px "Aref Ruqaa"','400 40px "Noto Naskh Arabic"','700 40px "Noto Naskh Arabic"','400 60px "Pinyon Script"','400 40px "Libre Baskerville"','700 40px "Libre Baskerville"','italic 400 40px "Libre Baskerville"','500 40px "Playfair Display"'];
+    try{ await Promise.all(f.map(x=>document.fonts.load(x, 'عدي Ağ 0'))); }catch(e){}
+  }
+  // write centred text, shrinking it until it fits maxW
+  function text(c, str, y, font, size, maxW, fill, dir){
+    c.direction = dir || 'inherit';
+    let s = size; do { c.font = font.replace('{s}', s); s -= 2; } while (c.measureText(str).width > maxW && s > 14);
+    c.fillStyle = fill; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(str, W/2, y);
+    return c.measureText(str).width;
+  }
+  function gold(c, y, h){ const g = c.createLinearGradient(0, y-h/2, 0, y+h/2); g.addColorStop(0,'#f0d6bd'); g.addColorStop(.55,'#d6ad87'); g.addColorStop(1,'#b4845e'); return g; }
+  function ring(c, x, y, r){ c.beginPath(); c.arc(x,y,r,0,Math.PI*2); c.strokeStyle = 'rgba(217,169,138,.85)'; c.lineWidth = 2.2; c.stroke(); }
+  function icon(c, kind, x, y){
+    ring(c, x, y, 32); c.save(); c.translate(x, y); c.strokeStyle = ROSE; c.lineWidth = 2.4; c.lineCap = 'round'; c.lineJoin = 'round'; c.beginPath();
+    if(kind==='cal'){ c.rect(-12,-10,24,22); c.moveTo(-12,-3); c.lineTo(12,-3); c.moveTo(-6,-15); c.lineTo(-6,-7); c.moveTo(6,-15); c.lineTo(6,-7); }
+    if(kind==='clock'){ c.arc(0,0,13,0,Math.PI*2); c.moveTo(0,-7); c.lineTo(0,0); c.lineTo(5,4); }
+    if(kind==='people'){ c.arc(-5,-5,5,0,Math.PI*2); c.moveTo(-15,12); c.quadraticCurveTo(-5,-1,5,12); c.moveTo(11,-4); c.arc(7,-4,4,0,Math.PI*2); c.moveTo(7,4); c.quadraticCurveTo(14,4,16,12); }
+    if(kind==='hall'){ c.moveTo(-14,-4); c.lineTo(0,-13); c.lineTo(14,-4); c.moveTo(-12,-4); c.lineTo(12,-4); [-9,-3,3,9].forEach(px=>{ c.moveTo(px,-3); c.lineTo(px,9); }); c.moveTo(-14,10); c.lineTo(14,10); }
+    c.stroke(); c.restore();
+  }
+  function seal(c, x, y, r){
+    const g = c.createRadialGradient(x-r*.35, y-r*.4, r*.1, x, y, r); g.addColorStop(0,'#f3dcc0'); g.addColorStop(.6,'#d2a77e'); g.addColorStop(1,'#a87650');
+    c.save(); c.shadowColor = 'rgba(0,0,0,.45)'; c.shadowBlur = 24; c.shadowOffsetY = 8; c.beginPath(); c.arc(x,y,r,0,Math.PI*2); c.fillStyle = g; c.fill(); c.restore();
+    c.beginPath(); c.arc(x,y,r*.78,0,Math.PI*2); c.strokeStyle = 'rgba(120,80,45,.55)'; c.lineWidth = 2; c.stroke();
+    c.save(); c.translate(x,y); c.strokeStyle = 'rgba(110,70,40,.85)'; c.lineWidth = 2.2;
+    for(let k=0;k<5;k++){ c.rotate(Math.PI*2/5); c.beginPath(); c.ellipse(0,-r*.3,r*.16,r*.3,0,0,Math.PI*2); c.stroke(); }
+    c.beginPath(); c.arc(0,0,r*.08,0,Math.PI*2); c.fillStyle = 'rgba(110,70,40,.85)'; c.fill(); c.restore();
+  }
+  function qr(c, data, x, y, size){
+    if(typeof qrcode !== 'function' || !data) return false;
+    const q = qrcode(0, 'Q'); q.addData(data); q.make();
+    const n = q.getModuleCount(), quiet = 4, cell = Math.floor(size / (n + quiet*2)), real = cell * (n + quiet*2);
+    const ox = Math.round(x - real/2), oy = Math.round(y);
+    c.save(); c.strokeStyle = 'rgba(217,169,138,.9)'; c.lineWidth = 2; c.beginPath(); c.roundRect(ox-14, oy-14, real+28, real+28, 18); c.stroke();
+    c.fillStyle = '#fbf3ee'; c.beginPath(); c.roundRect(ox, oy, real, real, 10); c.fill();
+    c.fillStyle = DARK;
+    for(let r=0;r<n;r++) for(let k=0;k<n;k++) if(q.isDark(r,k)) c.fillRect(ox + (k+quiet)*cell, oy + (r+quiet)*cell, cell, cell);
+    c.restore(); return real;
+  }
+  async function draw(st, L){
+    await fonts(); bg = bg || await loadImg('assets/hero-tulips.jpg');
+    const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const c = cv.getContext('2d'), t = TXT[L], rtl = L === 'ar' ? 'rtl' : 'ltr';
+    c.drawImage(bg, 0, 0, W, H);
+    // badge
+    c.font = L==='ar' ? '700 34px "Noto Naskh Arabic"' : '700 31px "Libre Baskerville"'; c.direction = rtl;
+    const bw = c.measureText(t.ok).width + 80; c.beginPath(); c.roundRect(W/2-bw/2, 300, bw, 66, 33); c.strokeStyle = 'rgba(217,169,138,.85)'; c.lineWidth = 2; c.stroke();
+    text(c, t.ok, 334, L==='ar' ? '700 {s}px "Noto Naskh Arabic"' : '700 {s}px "Libre Baskerville"', L==='ar'?34:31, 520, CREAM, rtl);
+    seal(c, W/2, 440, 60);
+    text(c, t.honor, 540, L==='ar' ? '400 {s}px "Noto Naskh Arabic"' : '400 {s}px "Libre Baskerville"', 32, 540, CREAM, rtl);
+    c.fillStyle = gold(c, 615, 90);
+    const nameFont = L==='ar' && /[\u0600-\u06FF]/.test(st.name) ? '700 {s}px "Aref Ruqaa"' : '700 {s}px "Libre Baskerville"';
+    text(c, st.name, 615, nameFont, 86, 560, gold(c, 615, 90), /[\u0600-\u06FF]/.test(st.name) ? 'rtl' : 'ltr');
+    // divider
+    c.strokeStyle = 'rgba(217,169,138,.6)'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(390,685); c.lineTo(520,685); c.moveTo(560,685); c.lineTo(690,685); c.stroke();
+    c.save(); c.translate(540,685); c.rotate(Math.PI/4); c.fillStyle = ROSE; c.fillRect(-6,-6,12,12); c.restore();
+    if(L==='ar'){
+      text(c, t.at, 740, '400 {s}px "Noto Naskh Arabic"', 32, 500, CREAM, 'rtl');
+      text(c, 'عُدَيّ  &  أَسْمَاء', 822, '700 {s}px "Aref Ruqaa"', 76, 560, gold(c, 822, 90), 'rtl');
+      text(c, 'Oday & Asmaa', 898, '400 {s}px "Pinyon Script"', 54, 500, ROSE, 'ltr');
+    } else {
+      text(c, 'Oday & Asmaa', 790, '400 {s}px "Pinyon Script"', 104, 600, gold(c, 790, 110), 'ltr');
+      text(c, t.at, 878, 'italic 400 {s}px "Libre Baskerville"', 32, 500, CREAM, 'ltr');
+    }
+    // ticket line with notches on the oval edge
+    c.save(); c.setLineDash([14,10]); c.strokeStyle = 'rgba(217,169,138,.6)'; c.lineWidth = 2; c.beginPath(); c.moveTo(200,948); c.lineTo(880,948); c.stroke(); c.restore();
+    [176,904].forEach(x=>{ c.beginPath(); c.arc(x,948,20,0,Math.PI*2); c.fillStyle = DARK; c.fill(); c.strokeStyle = 'rgba(217,169,138,.5)'; c.lineWidth = 1.5; c.stroke(); });
+    // date · time · guests
+    const cols = L==='ar' ? [[780,'cal','10/12/2026'],[540,'clock',t.time],[300,'people',t.count(st.count||1)]]
+                          : [[300,'cal','10/12/2026'],[540,'clock',t.time],[780,'people',t.count(st.count||1)]];
+    cols.forEach(([x,k,label])=>{ icon(c,k,x,1010); c.direction = rtl; c.font = /^[\d/:]+$/.test(label) ? '500 34px "Playfair Display"' : (L==='ar' ? '400 31px "Noto Naskh Arabic"' : '400 29px "Libre Baskerville"');
+      let s2 = parseInt(c.font); while(c.measureText(label).width > 220 && s2 > 18){ s2 -= 2; c.font = c.font.replace(/\d+px/, s2+'px'); }
+      c.fillStyle = CREAM; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(label, x, 1080); });
+    c.strokeStyle = 'rgba(217,169,138,.35)'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(420,985); c.lineTo(420,1100); c.moveTo(660,985); c.lineTo(660,1100); c.stroke();
+    // venue
+    icon(c,'hall',540,1158);
+    text(c, t.venue, 1220, L==='ar' ? '400 {s}px "Noto Naskh Arabic"' : '700 {s}px "Libre Baskerville"', 30, 640, ROSE, rtl);
+    text(c, t.city, 1262, '400 {s}px "Libre Baskerville"', 27, 600, CREAM, 'ltr');
+    // QR + invitation number
+    let y = 1300;
+    if(st.code){
+      const url = new URL('check.html?c=' + st.code, location.href).href;
+      const real = qr(c, url, W/2, y, 236);
+      if(real){ y += real + 50; text(c, t.code(st.code), y, L==='ar' ? '400 {s}px "Noto Naskh Arabic"' : '400 {s}px "Libre Baskerville"', 30, 380, CREAM, rtl); y += 48; }
+    } else y = 1420;
+    text(c, t.thanks, y, L==='ar' ? '400 {s}px "Noto Naskh Arabic"' : 'italic 400 {s}px "Libre Baskerville"', 27, 300, CREAM, rtl);
+    return new Promise(ok=>cv.toBlob(ok, 'image/jpeg', .93));
+  }
+  async function show(st){
+    const key = [st.name, st.count, st.code, lang].join('|'); const img = $('#card-img');
+    if(key === last.key && last.url){ img.src = last.url; img.classList.add('ready'); return; }
+    img.classList.remove('ready');
+    try{
+      const blob = await draw(st, lang); if(last.url) URL.revokeObjectURL(last.url);
+      last = { key, blob, url: URL.createObjectURL(blob), name: TXT[lang].file + (st.code ? '-' + st.code : '') + '.jpg' };
+      img.src = last.url; img.onload = ()=>img.classList.add('ready');
+    }catch(e){ console.warn('card', e); }
+  }
+  const file = () => last.blob && new File([last.blob], last.name, { type: 'image/jpeg' });
+  const canShareFile = f => !!(f && navigator.canShare && navigator.canShare({ files: [f] }));
+  async function share(){
+    const f = file(); if(!f) return;
+    if(canShareFile(f)){ try{ await navigator.share({ files: [f], title: 'Oday & Asmaa', text: TXT[lang].share }); }catch(e){} }
+    else if(navigator.share){ try{ await navigator.share({ title: 'Oday & Asmaa', text: TXT[lang].share, url: location.href.split('#')[0] }); }catch(e){} }
+    else save(true);
+  }
+  // iPhone cannot download images directly: its share sheet has "Save Image"
+  function save(force){
+    const f = file(); if(!f) return;
+    if(!force && /iP(hone|ad|od)/.test(navigator.userAgent) && canShareFile(f)) return share();
+    const a = Object.assign(document.createElement('a'), { href: last.url, download: last.name }); document.body.append(a); a.click(); a.remove();
+  }
+  return { show, share, save, draw };
+})();
+
 /* ---------- RSVP ---------- */
 const rName = $('#r-name'), rMsg = $('#r-msg'), rsvp = $('#rsvp');
 let count = 1, sending = false;
@@ -960,6 +1124,7 @@ function renderRsvp(){
   rsvp.classList.toggle('answered', !!st);
   if(st) $('#r-done').innerHTML = st.v==='yes' ? T[lang].yes(esc(st.name), st.count) : T[lang].no(esc(st.name));
   $('#after-yes').hidden = !(st && st.v==='yes');
+  if(st && st.v==='yes') Card.show(st);
 }
 // one id per phone, so changing the answer updates the same row instead of adding a new one
 function deviceId(){
@@ -982,6 +1147,7 @@ document.querySelectorAll('.rsvp-actions .btn').forEach(btn=>btn.addEventListene
         body:JSON.stringify({action:'rsvp', deviceId:deviceId(), name, attending:yes, count:state.count, lang})});
       const j = await r.json().catch(()=>({}));
       if(!r.ok || !j.ok) throw 0;
+      if(j.code) state.code = j.code;
     } else if(CONFIG.whatsappNumber){
       window.open('https://wa.me/'+CONFIG.whatsappNumber+'?text='+encodeURIComponent(T[lang].wa(name, count, yes)), '_blank');
     }
@@ -989,6 +1155,8 @@ document.querySelectorAll('.rsvp-actions .btn').forEach(btn=>btn.addEventListene
   }catch(e){ rMsg.textContent = T[lang].fail; }
   finally{ sending = false; btns.forEach(b=>b.disabled=false); }
 }));
+$('#card-save').addEventListener('click', ()=>Card.save());
+$('#card-share').addEventListener('click', ()=>Card.share());
 $('#rs-open').addEventListener('click',()=>{ rsvp.classList.add('open'); setTimeout(()=>rName.focus({preventScroll:true}), 350); });
 rName.addEventListener('input',()=>{ rMsg.textContent=''; rName.classList.remove('err'); });
 $('#r-change').addEventListener('click',()=>{ const st = store.get('inv_rsvp'); if(st) rName.value = st.name; try{ localStorage.removeItem('inv_rsvp'); }catch(e){} renderRsvp(); });

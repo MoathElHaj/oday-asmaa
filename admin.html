@@ -53,6 +53,7 @@ tr:last-child td{border-bottom:0}
 .tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:13px;font-weight:600}
 .tag.yes{background:rgba(95,138,90,.12);color:var(--yes)} .tag.no{background:rgba(176,100,90,.12);color:var(--no)}
 .muted{color:var(--soft);font-size:13px}
+.code{display:inline-block;margin-inline-start:6px;padding:0 8px;border-radius:6px;background:#f2ece3;color:var(--gold-d);font:600 12px ui-monospace,Menlo,monospace;letter-spacing:1px;vertical-align:middle}
 .del{border:0;background:none;color:var(--soft);cursor:pointer;font-size:18px;padding:4px 8px;border-radius:6px}
 .del:hover{color:var(--no);background:rgba(176,100,90,.08)}
 .empty{padding:40px 16px;text-align:center;color:var(--soft)}
@@ -157,7 +158,7 @@ function render(){
   const q = $('#q').value.trim().toLowerCase();
   const view = rows.filter(r => (filter==='all' || (filter==='yes') === r.attending) && (!q || r.name.toLowerCase().includes(q)));
   $('#rows').innerHTML = view.map(r => `<tr>
-    <td class="c-name">${esc(r.name)}${r.edits ? ` <span class="muted">(عُدّل ${r.edits})</span>` : ''}</td>
+    <td class="c-name">${esc(r.name)}${r.edits ? ` <span class="muted">(عُدّل ${r.edits})</span>` : ''}${r.code ? ` <span class="code">${esc(r.code)}</span>` : ''}</td>
     <td class="c-status"><span class="tag ${r.attending?'yes':'no'}">${r.attending?'سيحضر':'معتذر'}</span></td>
     <td class="c-count">${r.attending ? r.count + ' <span class="muted">شخص</span>' : '—'}</td>
     <td class="c-lang">${esc(r.lang)}</td>
