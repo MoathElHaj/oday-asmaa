@@ -107,11 +107,14 @@ html[data-lang=tr] .t-ar{display:none!important}
 html[data-lang=tr] .hero .date-line{font-family:var(--lat);font-size:min(4.6vw,2.5svh,18px)}
 html[data-lang=tr] .hero .names-lat{font-size:min(14vw,7.6svh,62px);margin-top:0}
 html[data-lang=tr] .invite .names-lat{font-size:min(13vw,52px)}
-.scroll-hint{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:4px;color:var(--gold-d);font-size:13px;opacity:0;transition:opacity 1s 2.4s;pointer-events:none;
+.scroll-hint{position:absolute;left:50%;white-space:nowrap;bottom:calc(64px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:4px;color:var(--gold-d);font-size:13px;opacity:0;transition:opacity 1s 2.4s;pointer-events:none;
   background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:30px;padding:4px 12px 4px 14px;box-shadow:0 6px 18px -8px rgba(60,70,40,.4)}
 .scroll-hint svg{width:16px!important;height:16px!important}
+.scroll-hint #days-left{font-family:var(--ar-d);font-weight:700;font-size:15px;color:var(--gold-d)}
+html[data-lang=tr] .scroll-hint #days-left{font-family:var(--lat);font-weight:600;font-size:16px}
+.scroll-hint .hg{animation:none!important;opacity:.9}
 .hero.done .scroll-hint{opacity:1;transition-delay:.6s}
-.scroll-hint svg{width:22px;height:22px;animation:bob 1.8s ease-in-out infinite}
+.scroll-hint .chev{animation:bob 1.8s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(6px)}}
 /* "open the invitation" button over the closed doors — one tap starts the video AND the music
    (phones never allow sound before the guest touches the page) */
@@ -151,11 +154,24 @@ html[data-lang=tr] .invite .names-lat{font-size:min(13vw,52px)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ================= PAPER CARDS ================= */
-main{position:relative;max-width:480px;margin:0 auto;padding:28px 16px 0}
-.sheet{position:relative;background:var(--paper);margin-bottom:34px;border-radius:4px;overflow:hidden;text-align:center;
+main{position:relative;max-width:480px;margin:0 auto;padding:30px 24px 0}
+@media (max-width:360px){ main{padding-inline:16px} }
+/* one continuous paper card from the invitation down to the RSVP */
+.paper{position:relative;background:var(--paper);margin-bottom:34px;border-radius:6px;overflow:hidden;padding-bottom:min(48vw,200px);
   box-shadow:0 1px 0 #fff inset,0 2px 6px rgba(80,85,50,.06),0 18px 36px -18px rgba(80,85,50,.32),0 40px 70px -40px rgba(93,111,80,.35);
   background-image:radial-gradient(ellipse 60% 40% at 15% 20%,rgba(226,220,196,.28),transparent 70%),radial-gradient(ellipse 50% 35% at 85% 70%,rgba(221,226,206,.3),transparent 70%),radial-gradient(ellipse 40% 30% at 60% 15%,rgba(240,232,214,.4),transparent 70%)}
-.sheet::before{content:"";position:absolute;inset:9px;border:1px solid rgba(179,147,82,.28);pointer-events:none;border-radius:2px}
+.paper::before{content:"";position:absolute;inset:9px;border:1px solid rgba(179,147,82,.28);pointer-events:none;border-radius:3px;z-index:2}
+.paper::after{content:"";position:absolute;inset:14px;border:1px solid rgba(179,147,82,.14);pointer-events:none;border-radius:2px;z-index:2}
+.sheet{position:relative;text-align:center}
+.sheet + .sheet .inner{padding-top:8px}
+/* small ornament between sections of the paper */
+.sep{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);padding:6px 0 0}
+.sep::before,.sep::after{content:"";width:34%;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.sep::after{transform:scaleX(-1)}
+.sep i{width:8px;height:8px;transform:rotate(45deg);background:var(--gold);opacity:.8}
+/* the RSVP sits in a softly tinted panel: the one place on the card where the guest acts */
+#rsvp .inner{margin:14px 18px 0;padding:26px 16px 24px;border-radius:14px;background:linear-gradient(180deg,rgba(236,240,228,.55),rgba(248,246,238,.6));box-shadow:0 0 0 1px rgba(179,147,82,.3) inset}
+@media (max-width:360px){ #rsvp .inner{margin-inline:10px;padding-inline:12px} }
 .inner{position:relative;z-index:1;padding:34px 24px 36px}
 
 /* reveal */
@@ -164,7 +180,7 @@ main{position:relative;max-width:480px;margin:0 auto;padding:28px 16px 0}
 
 /* main invitation card */
 .invite .bouquet{width:86%;margin:-6px auto 0;position:relative;z-index:1}
-.invite .inner{padding-top:4px;padding-bottom:150px}
+.invite .inner{padding-top:4px;padding-bottom:12px}
 .invite p.lead{margin-top:6px;font-family:var(--ar-d);font-size:19px;line-height:1.9;color:var(--ink)}
 .invite p.lead b{font-weight:inherit}
 .invite p.lead b[lang=tr]{display:block;font-family:var(--lat);font-style:italic;font-weight:500;font-size:20px;line-height:1.5;color:var(--ink)}
@@ -242,7 +258,7 @@ html[data-lang=tr] .venue h3 span{font-size:24px;letter-spacing:1.5px;color:var(
 .venue .note{display:inline-block;margin-top:10px;padding:3px 14px;border:1px solid var(--line);border-radius:30px;font-size:15.5px;font-weight:600;color:var(--gold-d);background:rgba(255,255,255,.7);padding:5px 16px}
 .venue .note b{font-weight:inherit}
 .venue .note b[lang=tr]{font-family:var(--lat);font-style:italic;font-weight:600;font-size:17px}
-.corner{position:absolute;bottom:0;width:44%;max-width:200px;pointer-events:none;z-index:0}
+.corner{position:absolute;bottom:0;width:44%;max-width:200px;pointer-events:none;z-index:1}
 .corner.l{left:0}.corner.r{right:0}
 
 /* buttons */
@@ -397,8 +413,10 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
     <div class="date-line"><span class="t-ar">الخميس</span><span class="t-tr" lang="tr">Perşembe</span><b>10 · 12 · 2026</b><span class="t-ar">7 مساءً</span><span class="t-tr" lang="tr">19:00</span></div>
     <div class="date-sub t-ar" lang="tr">Perşembe · 10 Aralık 2026 · 19:00</div>
   </div>
-  <div class="scroll-hint"><span class="t-ar">مرّر للأسفل</span><span class="t-tr" lang="tr">Aşağı kaydırın</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"/></svg></div>
+  <div class="scroll-hint">
+    <svg class="hg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3h11M6.5 21h11M7.5 3c0 5 4.5 6 4.5 9s-4.5 4-4.5 9M16.5 3c0 5-4.5 6-4.5 9s4.5 4 4.5 9"/><path d="M9.5 18.5h5" stroke-width="2.2"/></svg>
+    <span id="days-left"></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"/></svg></div>
   <button class="tap" id="tap" aria-label="افتح الدعوة · Davetiyeyi aç">
     <span class="seal-pos"><span class="seal-btn"><img src="assets/seal.webp" alt=""><i class="shine"></i></span></span>
     <span class="lbl">
@@ -432,6 +450,7 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
 </button>
 
 <main id="main">
+<div class="paper">
 
   <!-- ===== Invitation card ===== -->
   <section class="sheet invite rv">
@@ -472,8 +491,6 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
         </div>
       </div>
     </div>
-    <img class="corner l" src="assets/corner-l.webp" alt="">
-    <img class="corner r" src="assets/corner-r.webp" alt="">
   </section>
 
   <!-- ===== Countdown + notes (one card) ===== -->
@@ -504,6 +521,7 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
 
   <!-- ===== RSVP ===== -->
   <section class="sheet rv" id="rsvp">
+    <div class="sep"><i></i></div>
     <div class="inner">
       <h2><span class="t-ar">تأكيد الحضور</span><span class="t-tr" lang="tr">Katılım Teyidi</span></h2>
       <div class="divider"><i></i></div>
@@ -535,6 +553,9 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
         <button id="r-change"><span class="t-ar">تغيير الرد</span><span class="t-tr">Yanıtı değiştir</span></button></div>
     </div>
   </section>
+  <img class="corner l" src="assets/corner-l.webp" alt="">
+  <img class="corner r" src="assets/corner-r.webp" alt="">
+</div>
 </main>
 
 <footer class="rv">
@@ -598,7 +619,7 @@ function setLang(l){
   const h = document.documentElement;
   h.dataset.lang = l; h.lang = l; h.dir = l==='ar' ? 'rtl' : 'ltr';
   document.querySelectorAll('[data-set-lang]').forEach(b=>b.classList.toggle('on', b.dataset.setLang===l));
-  tick(); renderRsvp(); if(window.AS) AS.label();
+  tick(); renderRsvp(); daysBadge(); if(window.AS) AS.label();
 }
 document.querySelectorAll('[data-set-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.setLang)));
 
@@ -688,7 +709,6 @@ const AS = window.AS = (()=>{
   function start(){
     if(stopped || running || !CONFIG.autoScroll) return;
     running = true; pos = scrollY; last = 0; btn.classList.add('show'); label();
-    const h = $('.scroll-hint'); if(h) h.style.display = 'none';
     raf = requestAnimationFrame(frame);
   }
   function finish(){ running = false; stopped = true; cancelAnimationFrame(raf); btn.classList.remove('show'); }
@@ -794,6 +814,15 @@ function tick(){
   msg.textContent = (ymd(now)===ymd(start) && now < end) ? T[lang].today : now >= end ? T[lang].after : d < 864e5 ? T[lang].soon : '';
 }
 setInterval(tick, 1000);
+
+/* days-left badge on the opening screen (whole days in Istanbul time; no seconds, so it stays calm) */
+function daysBadge(){
+  const ymd = x => x.toLocaleDateString('en-CA',{timeZone:'Europe/Istanbul'});
+  const [a,b] = [ymd(new Date()), ymd(start)].map(v => Date.UTC(...v.split('-').map((n,i)=> i===1 ? n-1 : +n)));
+  const n = Math.round((b - a) / 864e5), el = $('#days-left'); if(!el) return;
+  if(lang === 'tr') el.textContent = n > 1 ? `Düğüne ${n} gün kaldı` : n === 1 ? 'Düğün yarın 🤍' : n === 0 ? 'Bugün düğün günü 🤍' : 'Teşekkürler 🤍';
+  else el.textContent = n > 10 ? `باقي ${n} يوماً على الفرح` : n > 2 ? `باقي ${n} أيام على الفرح` : n === 2 ? 'باقي يومان على الفرح' : n === 1 ? 'الفرح غداً 🤍' : n === 0 ? 'اليوم الفرح 🤍' : 'شكراً لمشاركتكم فرحتنا 🤍';
+}
 
 /* ---------- RSVP ---------- */
 const rName = $('#r-name'), rMsg = $('#r-msg'), rsvp = $('#rsvp');
