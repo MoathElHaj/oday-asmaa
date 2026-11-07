@@ -363,7 +363,7 @@ body{background:
   var(--page);background-attachment:scroll}
 
 /* notes inside the countdown card: three icon tiles in one row */
-.notes2{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line)}
+.notes2{margin-top:6px}
 .notes2 h3{font-family:var(--ar-d);font-weight:700;font-size:20px;color:var(--olive);margin-bottom:12px}
 html[data-lang=tr] .notes2 h3{font-family:var(--lat);font-weight:600;font-size:22px}
 .notes2 ul{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0}
@@ -493,20 +493,10 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
     </div>
   </section>
 
-  <!-- ===== Countdown + notes (one card) ===== -->
-  <section class="sheet rv" id="countdown">
+  <!-- ===== Important notes ===== -->
+  <section class="sheet rv" id="notes">
     <div class="inner">
       <img class="sprig" src="assets/bouquet.webp" alt="">
-      <h2><span class="t-ar">العد التنازلي</span><span class="t-tr" lang="tr">Geri Sayım</span></h2>
-      <div class="divider"><i></i></div>
-      <div class="cd">
-        <div><b id="cd-d">00</b><small><span class="t-ar">يوم</span><span class="t-tr">Gün</span></small></div>
-        <div><b id="cd-h">00</b><small><span class="t-ar">ساعة</span><span class="t-tr">Saat</span></small></div>
-        <div><b id="cd-m">00</b><small><span class="t-ar">دقيقة</span><span class="t-tr">Dakika</span></small></div>
-        <div><b id="cd-s">00</b><small><span class="t-ar">ثانية</span><span class="t-tr">Saniye</span></small></div>
-      </div>
-      <p class="cd-msg" id="cd-msg"></p>
-
       <div class="notes2">
         <h3><span class="t-ar">ملاحظات هامة</span><span class="t-tr" lang="tr">Önemli Notlar</span></h3>
         <ul>
@@ -803,17 +793,8 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 /* ---------- countdown ---------- */
 const start = new Date(CONFIG.eventStart), end = new Date(CONFIG.eventEnd);
 const pad = n => String(n).padStart(2,'0');
-function tick(){
-  const now = new Date(), d = start - now, msg = $('#cd-msg'), box = $('#countdown');
-  const ymd = x => x.toLocaleDateString('en-CA',{timeZone:'Europe/Istanbul'});
-  if(d > 0){
-    $('#cd-d').textContent = pad(Math.floor(d/864e5)); $('#cd-h').textContent = pad(Math.floor(d%864e5/36e5));
-    $('#cd-m').textContent = pad(Math.floor(d%36e5/6e4)); $('#cd-s').textContent = pad(Math.floor(d%6e4/1e3));
-  } else ['d','h','m','s'].forEach(k=>$('#cd-'+k).textContent='00');
-  box.classList.toggle('soon', d > 0 && d < 864e5);
-  msg.textContent = (ymd(now)===ymd(start) && now < end) ? T[lang].today : now >= end ? T[lang].after : d < 864e5 ? T[lang].soon : '';
-}
-setInterval(tick, 1000);
+function tick(){ daysBadge(); }          // the countdown now lives only in the days badge on the opening screen
+setInterval(tick, 60000);
 
 /* days-left badge on the opening screen (whole days in Istanbul time; no seconds, so it stays calm) */
 function daysBadge(){
