@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#fbfaf6">
+<meta name="theme-color" content="#4a0d1c">
 <title>عدي & أسماء · Oday & Asmaa</title>
 <meta property="og:title" content="عدي & أسماء · Oday & Asmaa">
 <meta property="og:description" content="نتشرف بدعوتكم لحضور حفل زفافنا · Düğünümüze davetlisiniz 🤍">
@@ -17,9 +17,9 @@
 <meta name="description" content="دعوة زفاف عدي وأسماء · الخميس 10/12/2026 · İNCİ Düğün Salonu">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Amiri:wght@700&family=Aref+Ruqaa:wght@700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Amiri:wght@700&family=Aref+Ruqaa:wght@700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/doors-burgundy.jpg">
-<link rel="preload" as="image" href="assets/intro-last.jpg">
+<link rel="preload" as="image" href="assets/hero-tulips.jpg">
 <style>
 :root{
   --page:#f4f2ea; --paper:#fdfcf8;
@@ -388,22 +388,156 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
   .rv,.hero-text > *{opacity:1!important;transform:none!important;transition:none!important}
   .scroll-hint svg,.music.playing svg,.soon .cd div,.tap .seal-glow,.tap .seal-glow::after,.door .pill svg{animation:none}
 }
+
+/* =====================================================================
+   v3 design: burgundy tulip opening + blush card with burgundy medallion
+   ===================================================================== */
+:root{--bur:#5a1024;--bur-d:#45091a;--bur-s:#7d4352;--blush:#ecdad7;--cream:#f4e7da;--rose:#c99b78;--bask:"Libre Baskerville",Georgia,serif}
+body{background:linear-gradient(180deg,#efdfdc 0%,#e7d2cf 100%) fixed;color:var(--bur)}
+.shadows{display:none}
+
+/* --- hero text placed inside the oval of the tulip art (positions from layoutHero) --- */
+.hero .hero-text{inset:auto;left:var(--hx);top:var(--hy);width:var(--hw);height:var(--hh);padding:0;bottom:auto;gap:calc(var(--hk) * 22px);color:var(--cream)}
+.hero .bism{width:calc(var(--hk) * 330px);height:auto}
+.hero .h-pre{font:400 calc(var(--hk) * 34px)/1.5 var(--ar);color:var(--cream)}
+.hero .h-pre [lang=tr]{font-family:var(--bask);font-size:calc(var(--hk) * 34px)}
+.hero .h-names,.hero .h-names-lat{display:flex;flex-direction:column;align-items:center;line-height:1;
+  background:linear-gradient(180deg,#f0d6bd 0%,#d6ad87 55%,#b4845e 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .h-names b{font:700 calc(var(--hk) * 130px)/1.45 var(--names);padding:0 .1em}
+.hero .h-names i{font:italic 400 calc(var(--hk) * 80px)/1 var(--bask);-webkit-text-fill-color:#d9b28d;margin:calc(var(--hk) * -10px) 0}
+.hero .h-names-lat b{font:400 calc(var(--hk) * 175px)/1.05 var(--script);padding:0 .12em}
+.hero .h-names-lat i{font:400 calc(var(--hk) * 40px)/1 var(--bask);font-style:normal;letter-spacing:2px;-webkit-text-fill-color:#e2c3a4;margin:calc(var(--hk) * -12px) 0}
+.hero .h-inv{font:700 calc(var(--hk) * 40px)/1.5 var(--ar-d);color:var(--cream)}
+.hero .h-inv [lang=tr]{font-family:var(--bask);font-weight:700;font-size:calc(var(--hk) * 38px)}
+.hero .h-date{font:400 calc(var(--hk) * 31px)/1.5 var(--ar);color:var(--cream);direction:inherit}
+.hero .h-date [lang=tr]{font-family:var(--bask)}
+.hero .h-date em{font-style:normal;opacity:.6;margin:0 .35em}
+.hero .h-date .num{font-family:var(--num)}
+.hero .h-venue{font:700 calc(var(--hk) * 44px)/1.3 var(--names);color:#d9a98a}
+.hero .h-venue [lang=tr]{font:400 calc(var(--hk) * 50px)/1.2 var(--script)}
+.hero .h-city{font:400 calc(var(--hk) * 30px)/1.3 var(--bask);color:var(--cream);margin-top:calc(var(--hk) * -12px)}
+.hero .scroll-hint{color:var(--bur);background:rgba(250,240,236,.92);border-color:rgba(176,138,74,.6)}
+.hero .scroll-hint #days-left{color:var(--bur)}
+
+/* top bar + auto-scroll button in burgundy */
+.pill{background:rgba(250,240,237,.92);border-color:rgba(90,16,36,.25)}
+.pill button{color:var(--bur-s)} .pill button.on{background:var(--bur);color:#fff}
+.music{color:var(--bur)}
+.autoscroll{color:var(--bur);border-color:rgba(90,16,36,.25);background:rgba(250,240,237,.95)}
+
+/* --- long card --- */
+main.v3{position:relative;max-width:480px;margin:0 auto;padding:30px 22px 34px;color:var(--bur);text-align:center}
+@media (max-width:360px){ main.v3{padding-inline:14px} }
+.v3 .fl{width:18px;height:18px;color:var(--bur)}
+.corner-fl{position:absolute;opacity:.9}
+.corner-fl.tl{top:22px;left:16px}.corner-fl.tr{top:22px;right:16px}.corner-fl.bl{bottom:20px;left:16px}.corner-fl.br{bottom:20px;right:16px}
+.v3-sec{position:relative;padding:8px 0}
+.v3-div{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px auto}
+.v3-div::before,.v3-div::after{content:"";width:min(28%,120px);height:1px;background:rgba(90,16,36,.28)}
+.v3-div .fl{width:14px;height:14px}
+
+.v3-top{padding-top:24px}
+.v3-calli{display:block;width:min(86%,340px);aspect-ratio:710/155;margin:0 auto 10px;background:var(--bur);
+  -webkit-mask:url(assets/calligraphy.webp) center/contain no-repeat;mask:url(assets/calligraphy.webp) center/contain no-repeat}
+.v3-bless{font:italic 400 16px/1.6 var(--bask);color:var(--bur)}
+.v3-lead{font:400 18px/1.85 var(--ar);color:var(--bur)}
+.v3-caps{margin-top:14px;font:400 15px/1.4 var(--bask);letter-spacing:2.5px;text-transform:uppercase;color:var(--bur)}
+.v3-lead-tr{font:400 16.5px/1.55 var(--bask);color:var(--bur-s)}
+html[data-lang=ar] .v3-lead-tr{font-style:italic;font-size:15px;margin-top:4px}
+html[data-lang=tr] .v3-lead-tr{color:var(--bur);margin-top:2px}
+
+.v3-medal{padding:14px 0 6px}
+.medal{position:relative;width:min(70%,290px);aspect-ratio:428/528;margin:0 auto;filter:drop-shadow(0 10px 18px rgba(69,9,26,.28))}
+.med-svg{position:absolute;inset:0;width:100%;height:100%}
+.medal-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.m-ar,.m-lat{display:flex;flex-direction:column;align-items:center;line-height:1;color:#fbeef0}
+.m-ar b{font:700 min(15vw,62px)/1.5 var(--names)}
+.m-ar i{font:italic 400 min(7vw,28px)/1 var(--bask);color:#f3d6dc;margin:2px 0}
+.m-lat i{font:italic 400 min(7vw,28px)/1 var(--bask);color:#f3d6dc;margin:-6px 0}
+.m-lat b{font:400 min(17vw,70px)/1.1 var(--script);padding:0 .1em}
+.scroll{position:absolute;top:50%;width:min(15%,64px);transform:translateY(-50%);opacity:.95;pointer-events:none}
+.scroll.l{left:-4px}.scroll.r{right:-4px;transform:translateY(-50%) scaleX(-1)}
+
+.dgrid{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;max-width:340px;margin:0 auto}
+.dg-side{display:flex;flex-direction:column;gap:2px;line-height:1.35}
+.dg-side b{font:700 20px/1.3 var(--ar-d);color:var(--bur)}
+.dg-side b[lang=tr]{font:400 17px/1.3 var(--bask);letter-spacing:1px}
+.dg-side span{font:400 16px/1.4 var(--ar);color:var(--bur)} .dg-side span[lang=tr]{font:400 15px/1.4 var(--bask)}
+.dg-side .num{font-family:var(--num)}
+.dg-day{font:500 62px/1 var(--num);color:var(--bur);padding:6px 22px;border-inline:1px solid rgba(90,16,36,.3)}
+.dg-sub{margin-top:8px;font:italic 400 14.5px/1.4 var(--bask);color:var(--bur-s)}
+
+.v3-ic{display:grid;place-items:center;width:42px;height:42px;margin:0 auto 8px;border-radius:50%;color:var(--bur);border:1px solid rgba(90,16,36,.35);background:rgba(255,250,248,.5)}
+.v3-ic svg{width:20px;height:20px}
+.v3 h3{font:700 24px/1.4 var(--names);color:var(--bur)}
+.v3 h3 [lang=tr]{font:700 21px/1.4 var(--bask);letter-spacing:1px}
+.v3-venue h3 [lang=tr]{letter-spacing:1.5px}
+.v-tr{font:400 17px/1.4 var(--bask);letter-spacing:1.5px;color:var(--bur)}
+.v-addr{margin-top:6px;font:400 15.5px/1.6 var(--bask);color:var(--bur-s)}
+.v-note{display:inline-block;margin-top:10px;padding:4px 18px;border:1px solid rgba(90,16,36,.3);border-radius:30px;font:500 14.5px/1.6 var(--ar);color:var(--bur)}
+.v-note [lang=tr]{font-family:var(--bask);font-size:14.5px}
+.v3-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;min-height:48px;padding:10px 26px;border-radius:40px;border:1px solid var(--bur-d);
+  background:linear-gradient(180deg,#6a1530,var(--bur-d));color:#fbeef0;font:600 16px var(--ar);text-decoration:none;cursor:pointer;
+  box-shadow:0 0 0 3px rgba(255,248,246,.6),0 0 0 4px rgba(90,16,36,.35),0 10px 20px -10px rgba(69,9,26,.7);transition:transform .15s}
+.v3-btn:active{transform:scale(.97)}
+.v3-btn svg{width:18px;height:18px;flex:none}
+html[data-lang=tr] .v3-btn{font:400 16px var(--bask)}
+
+.v3-notes ul{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);margin-top:12px}
+.v3-notes li{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 4px;font:400 14px/1.5 var(--ar);color:var(--bur)}
+html[data-lang=tr] .v3-notes li{font:400 13.5px/1.45 var(--bask)}
+.v3-notes .n-ic{width:40px;height:40px;color:var(--bur);background:rgba(255,250,248,.5);box-shadow:0 0 0 1px rgba(90,16,36,.35)}
+.v3-notes .n-ic svg{width:19px;height:19px}
+
+#rsvp .rs-title{margin-bottom:4px}
+#rsvp:not(.open):not(.answered) .rs-panel{display:none}
+#rsvp.open .rs-open,#rsvp.answered .rs-open{display:none}
+#rsvp .rs-panel{margin:14px auto 0;max-width:360px;padding:20px 16px;border-radius:16px;background:rgba(255,250,248,.6);box-shadow:0 0 0 1px rgba(90,16,36,.18) inset;animation:rsin .45s ease}
+@keyframes rsin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#rsvp .rsvp-form{margin-top:0}
+#rsvp .field > span{color:var(--bur-s)}
+#rsvp .field input,#rsvp .stepper{border-color:rgba(90,16,36,.28)}
+#rsvp .field input:focus{border-color:var(--bur);box-shadow:0 0 0 3px rgba(90,16,36,.12)}
+#rsvp .stepper button{color:var(--bur);background:#f3e6e4}
+#rsvp .btn.sage{background:linear-gradient(180deg,#6a1530,var(--bur-d));border-color:var(--bur-d);box-shadow:0 10px 20px -10px rgba(69,9,26,.7)}
+#rsvp .btn.ghost{color:var(--bur);border-color:rgba(90,16,36,.35)}
+#rsvp .btn:not(.ghost):not(.sage){background:linear-gradient(180deg,#6a1530,var(--bur-d));border-color:var(--bur-d)}
+#rsvp .rsvp-done{background:rgba(255,250,248,.75);border-color:rgba(90,16,36,.2)}
+#rsvp .rsvp-done > p{color:var(--bur)}
+
+.v3-end{padding-bottom:30px}
+.e-ar{font:700 22px/1.5 var(--names);color:var(--bur)}
+.e-ar [lang=tr]{font:italic 400 17px/1.5 var(--bask)}
+.e-lat{font:400 min(12vw,46px)/1.2 var(--script);color:var(--bur);direction:ltr}
+.e-lat i{font:italic 400 26px var(--bask);margin:0 4px}
+.v3-bless,.v3-lead-tr{max-width:340px;margin-inline:auto;text-wrap:balance}
+@media (max-width:360px){
+  .v3-bless{font-size:14.5px} .v3-lead-tr{font-size:15px} .v3-caps{font-size:13px;letter-spacing:1.5px}
+  .dg-side b{font-size:17px} .dg-side b[lang=tr]{font-size:14.5px;letter-spacing:.5px} .dg-side span,.dg-side span[lang=tr]{font-size:13.5px}
+  .dg-day{font-size:52px;padding:6px 14px}
+  .v-note{font-size:13px;padding-inline:12px} .v-addr{font-size:14.5px}
+  .v3 h3{font-size:22px} .v3 h3 [lang=tr]{font-size:19px}
+}
+/* Turkish lines keep left-to-right punctuation even inside the Arabic page */
+[lang=tr]{direction:ltr;unicode-bidi:isolate}
+.v3 .fl{width:16px;height:16px}
 </style>
 </head>
 <body class="locked">
 
 <!-- ===== Opening: calla-lily doors sealed with gold wax ===== -->
 <section class="hero" id="hero">
-  <img class="end" src="assets/intro-last.jpg" alt="" aria-hidden="true">
+  <img class="end" src="assets/hero-tulips.jpg" alt="" aria-hidden="true">
   <div class="doors" aria-hidden="true"><div class="door l"><i></i><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5V5.2a1.6 1.6 0 0 1 3.2 0v5.3"/><path d="M12.2 10.2V9.1a1.6 1.6 0 0 1 3.2 0v1.6"/><path d="M15.4 10.4a1.6 1.6 0 0 1 3.2 0v3.8a6.3 6.3 0 0 1-6.3 6.3h-.6a6 6 0 0 1-4.6-2.2l-2.6-3.3a1.6 1.6 0 0 1 2.4-2.1L9 14.5"/><path d="M5.5 4.5 4 3M14.5 4.5 16 3M10.6 1.6V0"/></svg><b class="t-ar">المس الختم لفتح دعوتنا</b><b class="t-tr" lang="tr">Açmak için mühre dokunun</b></span></div><div class="door r"><i></i><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5V5.2a1.6 1.6 0 0 1 3.2 0v5.3"/><path d="M12.2 10.2V9.1a1.6 1.6 0 0 1 3.2 0v1.6"/><path d="M15.4 10.4a1.6 1.6 0 0 1 3.2 0v3.8a6.3 6.3 0 0 1-6.3 6.3h-.6a6 6 0 0 1-4.6-2.2l-2.6-3.3a1.6 1.6 0 0 1 2.4-2.1L9 14.5"/><path d="M5.5 4.5 4 3M14.5 4.5 16 3M10.6 1.6V0"/></svg><b class="t-ar">المس الختم لفتح دعوتنا</b><b class="t-tr" lang="tr">Açmak için mühre dokunun</b></span></div></div>
   <div class="hero-text">
-    <img class="calli t-ar" src="assets/calligraphy.webp" alt="بارك الله لهما وبارك عليهما وجمع بينهما في خير">
-    <p class="tr-bless t-tr" lang="tr">Allah’ın izniyle</p>
-    <p class="intro-line"><span class="t-ar">نتشرف بدعوتكم لحضور حفل زفاف</span><span class="t-tr tr-line" lang="tr">Düğünümüze davetlisiniz</span></p>
-    <div class="names-ar t-ar">عدي <small>&</small> أسماء</div>
-    <div class="names-lat">Oday <span class="amp">&</span> Asmaa</div>
-    <div class="date-line"><span class="t-ar">الخميس</span><span class="t-tr" lang="tr">Perşembe</span><b>10 · 12 · 2026</b><span class="t-ar">7 مساءً</span><span class="t-tr" lang="tr">19:00</span></div>
-    <div class="date-sub t-ar" lang="tr">Perşembe · 10 Aralık 2026 · 19:00</div>
+    <img class="bism" src="assets/bismillah.webp" alt="بسم الله الرحمن الرحيم">
+    <p class="h-pre"><span class="t-ar">بفضل من الله ورعايته</span><span class="t-tr" lang="tr">Aileleriyle birlikte,</span></p>
+    <div class="h-names t-ar"><b>عُدَيّ</b><i>&amp;</i><b>أَسْمَاء</b></div>
+    <div class="h-names-lat t-tr" lang="tr"><b>Oday</b><i>VE</i><b>Asmaa</b></div>
+    <p class="h-inv"><span class="t-ar">يسرّنا دعوتكم لحضور حفل زفافنا</span><span class="t-tr" lang="tr">Sizleri düğünlerine davet ediyorlar</span></p>
+    <p class="h-date"><span class="t-ar">الخميس <span class="num">10/12/2026</span> <em>|</em> الساعة <span class="num">7:00</span> مساءً</span><span class="t-tr" lang="tr">Perşembe, 10 Aralık 2026 <em>|</em> 19:00</span></p>
+    <p class="h-venue"><span class="t-ar">قاعة إنجي للأفراح</span><span class="t-tr" lang="tr">İnci Düğün Salonu</span></p>
+    <p class="h-city" lang="tr">Başakşehir / İstanbul</p>
   </div>
   <div class="scroll-hint">
     <svg class="hg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3h11M6.5 21h11M7.5 3c0 5 4.5 6 4.5 9s-4.5 4-4.5 9M16.5 3c0 5-4.5 6-4.5 9s4.5 4 4.5 9"/><path d="M9.5 18.5h5" stroke-width="2.2"/></svg>
@@ -412,11 +546,6 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
   <button class="tap" id="tap" aria-label="افتح الدعوة · Davetiyeyi aç"><span class="seal-glow"></span></button>
 </section>
 
-<div class="ambient shadows" id="shadows" aria-hidden="true">
-  <img class="s1" src="assets/bouquet.webp" alt="">
-  <img class="s2" src="assets/corner-l.webp" alt="">
-  <img class="s3" src="assets/corner-r.webp" alt="">
-</div>
 <canvas class="ambient" id="petals" aria-hidden="true"></canvas>
 
 <div class="topbar" id="topbar">
@@ -435,73 +564,84 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
   <span class="lbl"></span>
 </button>
 
-<main id="main">
-<div class="paper">
+<main id="main" class="v3">
+  <span class="corner-fl tl"><svg class="fl" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="6.6" rx="3.3" ry="4.6"/><ellipse cx="12" cy="17.4" rx="3.3" ry="4.6"/><ellipse cx="6.6" cy="12" rx="4.6" ry="3.3"/><ellipse cx="17.4" cy="12" rx="4.6" ry="3.3"/></g><circle cx="12" cy="12" r="2.2" fill="#f2e2df"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/></svg></span><span class="corner-fl tr"><svg class="fl" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="6.6" rx="3.3" ry="4.6"/><ellipse cx="12" cy="17.4" rx="3.3" ry="4.6"/><ellipse cx="6.6" cy="12" rx="4.6" ry="3.3"/><ellipse cx="17.4" cy="12" rx="4.6" ry="3.3"/></g><circle cx="12" cy="12" r="2.2" fill="#f2e2df"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/></svg></span>
 
-  <!-- ===== Invitation card ===== -->
-  <section class="sheet invite rv">
-    <img class="bouquet" src="assets/bouquet.webp" alt="">
-    <div class="inner">
-      <p class="lead"><b class="t-ar">بفضل من الله ورعايته يسرّنا دعوتكم<br>لمشاركتنا فرحتنا في حفل زفافنا</b><b class="t-tr" lang="tr">Sizleri düğün yemeğimize ve törenimize davet etmekten onur duyarız.</b></p>
-      <div class="names">
-        <div class="names-ar t-ar">عدي <small>&</small> أسماء</div>
-        <div class="names-lat">Oday <span class="amp">&</span> Asmaa</div>
-      </div>
+  <!-- blessing + invitation line -->
+  <section class="v3-sec rv v3-top">
+    <span class="v3-calli t-ar" role="img" aria-label="بارك الله لهما وبارك عليهما وجمع بينهما في خير"></span>
+    <p class="v3-bless t-tr" lang="tr">Allah onlar için mübarek kılsın, onlara bereket versin ve onları hayırda bir araya getirsin.</p>
+    <p class="v3-lead t-ar">بفضل من الله ورعايته يسرّنا دعوتكم<br>لمشاركتنا فرحتنا في حفل زفافنا</p>
+    <p class="v3-caps t-tr" lang="tr">Allah'ın lütfu ve inayetiyle</p>
+    <p class="v3-lead-tr" lang="tr"><span class="t-ar">Sizleri düğün yemeğimize ve törenimize davet etmekten onur duyarız.</span><span class="t-tr">Sizleri düğün yemeğimize ve törenimize davet etmekten onur duyarız.</span></p>
+  </section>
 
-      <!-- date · day · time on one row, each with an icon -->
-      <div class="when">
-        <div class="w-item">
-          <i class="w-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.3" fill="currentColor" stroke="none"/></svg></i>
-          <div class="w-txt"><b class="num">10/12/2026</b></div>
-        </div>
-        <div class="w-item">
-          <i class="w-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></i>
-          <div class="w-txt"><b class="t-ar">الخميس</b><b class="t-tr" lang="tr">Perşembe</b><small class="t-ar" lang="tr">Perşembe</small></div>
-        </div>
-        <div class="w-item">
-          <i class="w-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></i>
-          <div class="w-txt"><b class="t-ar">الساعة <span class="num">7:00</span> مساءً</b><b class="t-tr num">19:00</b><small class="t-ar" lang="tr">Saat <span class="num">19:00</span></small></div>
-        </div>
-      </div>
-
-      <div class="venue">
-        <i class="venue-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15M5.5 9.5v8.5M9.5 9.5v8.5M14.5 9.5v8.5M18.5 9.5v8.5M3.5 18h17M2.5 20.5h19"/></svg></i>
-        <h3><b class="t-ar">قاعة إنجي للأفراح</b><span lang="tr">İNCİ Düğün Salonu</span></h3>
-        <p class="addr" lang="tr">Başakşehir Mah.<br>Hürriyet Bulvarı No: 76<br>Başakşehir / İstanbul</p>
-        <p class="note"><b class="t-ar">فوق مطعم عزيزان · الطابق الخامس</b><b class="t-tr" lang="tr">Azizan Restaurant Üstü · 5. Kat</b></p>
-        <div class="btn-row">
-          <a class="btn sage" id="maps-link" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-            <span class="t-ar">افتح الموقع في الخرائط</span><span class="t-tr" lang="tr">Haritada Aç</span>
-          </a>
-        </div>
+  <!-- names medallion -->
+  <section class="v3-sec rv v3-medal">
+    <img class="scroll l" src="assets/scroll-l.webp" alt=""><img class="scroll r" src="assets/scroll-l.webp" alt="">
+    <div class="medal">
+      <svg class="med-svg" viewBox="-14 -14 428 528" aria-hidden="true">
+          <polygon points="386.0,250.0 396.9,258.8 385.5,266.8 395.9,276.4 384.1,283.6 393.9,293.9 381.7,300.2 390.9,311.1 378.5,316.5 386.9,328.0 374.3,332.5 382.0,344.5 369.2,348.0 376.2,360.6 363.2,363.1 369.4,376.0 356.5,377.6 361.8,390.9 348.9,391.4 353.4,405.0 340.6,404.5 344.2,418.3 331.5,416.9 334.2,430.8 321.8,428.4 323.6,442.3 311.5,438.9 312.4,452.9 300.6,448.5 300.5,462.4 289.1,457.1 288.2,470.9 277.3,464.7 275.4,478.2 265.0,471.1 262.2,484.4 252.4,476.4 248.7,489.3 239.5,480.6 235.0,493.1 226.5,483.6 221.1,495.6 213.3,485.4 207.0,496.8 200.0,486.0 193.0,496.8 186.7,485.4 178.9,495.6 173.5,483.6 165.0,493.1 160.5,480.6 151.3,489.3 147.6,476.4 137.8,484.4 135.0,471.1 124.6,478.2 122.7,464.7 111.8,470.9 110.9,457.1 99.5,462.4 99.4,448.5 87.6,452.9 88.5,438.9 76.4,442.3 78.2,428.4 65.8,430.8 68.5,416.9 55.8,418.3 59.4,404.5 46.6,405.0 51.1,391.4 38.2,390.9 43.5,377.6 30.6,376.0 36.8,363.1 23.8,360.6 30.8,348.0 18.0,344.5 25.7,332.5 13.1,328.0 21.5,316.5 9.1,311.1 18.3,300.2 6.1,293.9 15.9,283.6 4.1,276.4 14.5,266.8 3.1,258.8 14.0,250.0 3.1,241.2 14.5,233.2 4.1,223.6 15.9,216.4 6.1,206.1 18.3,199.8 9.1,188.9 21.5,183.5 13.1,172.0 25.7,167.5 18.0,155.5 30.8,152.0 23.8,139.4 36.8,136.9 30.6,124.0 43.5,122.4 38.2,109.1 51.1,108.6 46.6,95.0 59.4,95.5 55.8,81.7 68.5,83.1 65.8,69.2 78.2,71.6 76.4,57.7 88.5,61.1 87.6,47.1 99.4,51.5 99.5,37.6 110.9,42.9 111.8,29.1 122.7,35.3 124.6,21.8 135.0,28.9 137.8,15.6 147.6,23.6 151.3,10.7 160.5,19.4 165.0,6.9 173.5,16.4 178.9,4.4 186.7,14.6 193.0,3.2 200.0,14.0 207.0,3.2 213.3,14.6 221.1,4.4 226.5,16.4 235.0,6.9 239.5,19.4 248.7,10.7 252.4,23.6 262.2,15.6 265.0,28.9 275.4,21.8 277.3,35.3 288.2,29.1 289.1,42.9 300.5,37.6 300.6,51.5 312.4,47.1 311.5,61.1 323.6,57.7 321.8,71.6 334.2,69.2 331.5,83.1 344.2,81.7 340.6,95.5 353.4,95.0 348.9,108.6 361.8,109.1 356.5,122.4 369.4,124.0 363.2,136.9 376.2,139.4 369.2,152.0 382.0,155.5 374.3,167.5 386.9,172.0 378.5,183.5 390.9,188.9 381.7,199.8 393.9,206.1 384.1,216.4 395.9,223.6 385.5,233.2 396.9,241.2" fill="#5a1024"/>
+          <ellipse cx="200" cy="250" rx="184" ry="234" fill="#5a1024" stroke="#f3d9df" stroke-opacity=".55" stroke-width="1.2"/>
+          <g fill="#f6e3e7" opacity=".55"><circle cx="377.0" cy="250.0" r="1.3"/><circle cx="376.8" cy="261.9" r="1.3"/><circle cx="376.0" cy="273.7" r="1.3"/><circle cx="374.8" cy="285.5" r="1.3"/><circle cx="373.1" cy="297.2" r="1.3"/><circle cx="371.0" cy="308.8" r="1.3"/><circle cx="368.3" cy="320.1" r="1.3"/><circle cx="365.2" cy="331.3" r="1.3"/><circle cx="361.7" cy="342.3" r="1.3"/><circle cx="357.7" cy="353.1" r="1.3"/><circle cx="353.3" cy="363.5" r="1.3"/><circle cx="348.4" cy="373.6" r="1.3"/><circle cx="343.2" cy="383.4" r="1.3"/><circle cx="337.6" cy="392.9" r="1.3"/><circle cx="331.5" cy="401.9" r="1.3"/><circle cx="325.2" cy="410.5" r="1.3"/><circle cx="318.4" cy="418.7" r="1.3"/><circle cx="311.4" cy="426.4" r="1.3"/><circle cx="304.0" cy="433.6" r="1.3"/><circle cx="296.4" cy="440.4" r="1.3"/><circle cx="288.5" cy="446.6" r="1.3"/><circle cx="280.4" cy="452.3" r="1.3"/><circle cx="272.0" cy="457.4" r="1.3"/><circle cx="263.4" cy="461.9" r="1.3"/><circle cx="254.7" cy="465.9" r="1.3"/><circle cx="245.8" cy="469.3" r="1.3"/><circle cx="236.8" cy="472.0" r="1.3"/><circle cx="227.7" cy="474.2" r="1.3"/><circle cx="218.5" cy="475.8" r="1.3"/><circle cx="209.3" cy="476.7" r="1.3"/><circle cx="200.0" cy="477.0" r="1.3"/><circle cx="190.7" cy="476.7" r="1.3"/><circle cx="181.5" cy="475.8" r="1.3"/><circle cx="172.3" cy="474.2" r="1.3"/><circle cx="163.2" cy="472.0" r="1.3"/><circle cx="154.2" cy="469.3" r="1.3"/><circle cx="145.3" cy="465.9" r="1.3"/><circle cx="136.6" cy="461.9" r="1.3"/><circle cx="128.0" cy="457.4" r="1.3"/><circle cx="119.6" cy="452.3" r="1.3"/><circle cx="111.5" cy="446.6" r="1.3"/><circle cx="103.6" cy="440.4" r="1.3"/><circle cx="96.0" cy="433.6" r="1.3"/><circle cx="88.6" cy="426.4" r="1.3"/><circle cx="81.6" cy="418.7" r="1.3"/><circle cx="74.8" cy="410.5" r="1.3"/><circle cx="68.5" cy="401.9" r="1.3"/><circle cx="62.4" cy="392.9" r="1.3"/><circle cx="56.8" cy="383.4" r="1.3"/><circle cx="51.6" cy="373.6" r="1.3"/><circle cx="46.7" cy="363.5" r="1.3"/><circle cx="42.3" cy="353.1" r="1.3"/><circle cx="38.3" cy="342.3" r="1.3"/><circle cx="34.8" cy="331.3" r="1.3"/><circle cx="31.7" cy="320.1" r="1.3"/><circle cx="29.0" cy="308.8" r="1.3"/><circle cx="26.9" cy="297.2" r="1.3"/><circle cx="25.2" cy="285.5" r="1.3"/><circle cx="24.0" cy="273.7" r="1.3"/><circle cx="23.2" cy="261.9" r="1.3"/><circle cx="23.0" cy="250.0" r="1.3"/><circle cx="23.2" cy="238.1" r="1.3"/><circle cx="24.0" cy="226.3" r="1.3"/><circle cx="25.2" cy="214.5" r="1.3"/><circle cx="26.9" cy="202.8" r="1.3"/><circle cx="29.0" cy="191.2" r="1.3"/><circle cx="31.7" cy="179.9" r="1.3"/><circle cx="34.8" cy="168.7" r="1.3"/><circle cx="38.3" cy="157.7" r="1.3"/><circle cx="42.3" cy="146.9" r="1.3"/><circle cx="46.7" cy="136.5" r="1.3"/><circle cx="51.6" cy="126.4" r="1.3"/><circle cx="56.8" cy="116.6" r="1.3"/><circle cx="62.4" cy="107.1" r="1.3"/><circle cx="68.5" cy="98.1" r="1.3"/><circle cx="74.8" cy="89.5" r="1.3"/><circle cx="81.6" cy="81.3" r="1.3"/><circle cx="88.6" cy="73.6" r="1.3"/><circle cx="96.0" cy="66.4" r="1.3"/><circle cx="103.6" cy="59.6" r="1.3"/><circle cx="111.5" cy="53.4" r="1.3"/><circle cx="119.6" cy="47.7" r="1.3"/><circle cx="128.0" cy="42.6" r="1.3"/><circle cx="136.6" cy="38.1" r="1.3"/><circle cx="145.3" cy="34.1" r="1.3"/><circle cx="154.2" cy="30.7" r="1.3"/><circle cx="163.2" cy="28.0" r="1.3"/><circle cx="172.3" cy="25.8" r="1.3"/><circle cx="181.5" cy="24.2" r="1.3"/><circle cx="190.7" cy="23.3" r="1.3"/><circle cx="200.0" cy="23.0" r="1.3"/><circle cx="209.3" cy="23.3" r="1.3"/><circle cx="218.5" cy="24.2" r="1.3"/><circle cx="227.7" cy="25.8" r="1.3"/><circle cx="236.8" cy="28.0" r="1.3"/><circle cx="245.8" cy="30.7" r="1.3"/><circle cx="254.7" cy="34.1" r="1.3"/><circle cx="263.4" cy="38.1" r="1.3"/><circle cx="272.0" cy="42.6" r="1.3"/><circle cx="280.4" cy="47.7" r="1.3"/><circle cx="288.5" cy="53.4" r="1.3"/><circle cx="296.4" cy="59.6" r="1.3"/><circle cx="304.0" cy="66.4" r="1.3"/><circle cx="311.4" cy="73.6" r="1.3"/><circle cx="318.4" cy="81.3" r="1.3"/><circle cx="325.2" cy="89.5" r="1.3"/><circle cx="331.5" cy="98.1" r="1.3"/><circle cx="337.6" cy="107.1" r="1.3"/><circle cx="343.2" cy="116.6" r="1.3"/><circle cx="348.4" cy="126.4" r="1.3"/><circle cx="353.3" cy="136.5" r="1.3"/><circle cx="357.7" cy="146.9" r="1.3"/><circle cx="361.7" cy="157.7" r="1.3"/><circle cx="365.2" cy="168.7" r="1.3"/><circle cx="368.3" cy="179.9" r="1.3"/><circle cx="371.0" cy="191.2" r="1.3"/><circle cx="373.1" cy="202.8" r="1.3"/><circle cx="374.8" cy="214.5" r="1.3"/><circle cx="376.0" cy="226.3" r="1.3"/><circle cx="376.8" cy="238.1" r="1.3"/></g>
+          <ellipse cx="200" cy="250" rx="168" ry="218" fill="none" stroke="#f3d9df" stroke-opacity=".35" stroke-width="1"/>
+        </svg>
+      <div class="medal-txt">
+        <div class="m-ar t-ar"><b>عُدَيّ</b><i>&amp;</i><b>أَسْمَاء</b></div>
+        <div class="m-lat t-tr" lang="tr"><b>Oday</b><i>&amp;</i><b>Asmaa</b></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Important notes ===== -->
-  <section class="sheet rv" id="notes">
-    <div class="inner">
-      <img class="sprig" src="assets/bouquet.webp" alt="">
-      <div class="notes2">
-        <h3><span class="t-ar">ملاحظات هامة</span><span class="t-tr" lang="tr">Önemli Notlar</span></h3>
-        <ul>
+  <div class="v3-div"><svg class="fl" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="6.6" rx="3.3" ry="4.6"/><ellipse cx="12" cy="17.4" rx="3.3" ry="4.6"/><ellipse cx="6.6" cy="12" rx="4.6" ry="3.3"/><ellipse cx="17.4" cy="12" rx="4.6" ry="3.3"/></g><circle cx="12" cy="12" r="2.2" fill="#f2e2df"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/></svg></div>
+
+  <!-- date -->
+  <section class="v3-sec rv v3-date">
+    <div class="dgrid">
+      <div class="dg-side"><b class="t-ar">الخميس</b><b class="t-tr" lang="tr">PERŞEMBE</b><span class="t-ar">الساعة <span class="num">7:00</span> مساءً</span><span class="t-tr" lang="tr">SAAT <span class="num">19:00</span></span></div>
+      <div class="dg-day">10</div>
+      <div class="dg-side"><b class="t-ar">ديسمبر</b><b class="t-tr" lang="tr">ARALIK</b><span class="num">2026</span></div>
+    </div>
+    <p class="dg-sub t-ar" lang="tr">Perşembe · Saat <span class="num">19:00</span></p>
+  </section>
+
+  <div class="v3-div"><svg class="fl" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="6.6" rx="3.3" ry="4.6"/><ellipse cx="12" cy="17.4" rx="3.3" ry="4.6"/><ellipse cx="6.6" cy="12" rx="4.6" ry="3.3"/><ellipse cx="17.4" cy="12" rx="4.6" ry="3.3"/></g><circle cx="12" cy="12" r="2.2" fill="#f2e2df"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/></svg></div>
+
+  <!-- venue -->
+  <section class="v3-sec rv v3-venue">
+    <i class="v3-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"><path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 9.5h15M5.5 9.5v8.5M9.5 9.5v8.5M14.5 9.5v8.5M18.5 9.5v8.5M3.5 18h17M2.5 20.5h19"/></svg></i>
+    <h3><span class="t-ar">قاعة إنجي للأفراح</span><span class="t-tr" lang="tr">İNCİ Düğün Salonu</span></h3>
+    <p class="v-tr t-ar" lang="tr">İNCİ Düğün Salonu</p>
+    <p class="v-addr" lang="tr">Başakşehir Mah.<br>Hürriyet Bulvarı No: 76<br>Başakşehir / İstanbul</p>
+    <p class="v-note"><span class="t-ar">فوق مطعم عزيزان · الطابق الخامس</span><span class="t-tr" lang="tr">Azizan Restoranı'nın üstü · 5. Kat</span></p>
+    <a class="v3-btn" id="maps-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+      <span class="t-ar">عرض الموقع على الخريطة</span><span class="t-tr" lang="tr">Konumu Haritada Gör</span>
+    </a>
+  </section>
+
+  <div class="v3-div"><svg class="fl" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="6.6" rx="3.3" ry="4.6"/><ellipse cx="12" cy="17.4" rx="3.3" ry="4.6"/><ellipse cx="6.6" cy="12" rx="4.6" ry="3.3"/><ellipse cx="17.4" cy="12" rx="4.6" ry="3.3"/></g><circle cx="12" cy="12" r="2.2" fill="#f2e2df"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/></svg></div>
+
+  <!-- notes -->
+  <section class="v3-sec rv v3-notes" id="notes">
+    <h3><span class="t-ar">ملاحظات هامة</span><span class="t-tr" lang="tr">ÖNEMLİ NOTLAR</span></h3>
+    <ul>
           <li><i class="n-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6.2" r="2.3"/><path d="M8.6 20v-5.2L7 11.6a1.4 1.4 0 0 1 1.3-2h7.4a1.4 1.4 0 0 1 1.3 2l-1.6 3.2V20"/><path d="M12 15v5"/><path d="M4 4l16 16"/></svg></i><span class="t-ar">نعتذر عن استقبال الأطفال</span><span class="t-tr" lang="tr">Çocuk kabul edilmemektedir</span></li>
           <li><i class="n-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/><path d="M12 3.6c-.7-.8-2-.5-2 .6 0 .9 2 2 2 2s2-1.1 2-2c0-1.1-1.3-1.4-2-.6z" fill="currentColor" stroke="none"/></svg></i><span class="t-ar">الدعوة خاصة بشخصكم الكريم</span><span class="t-tr" lang="tr">Davetiyemiz kişiye özeldir</span></li>
           <li><i class="n-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.6-2.2h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.2" r="3.2"/><path d="M3 3.5l18 17"/></svg></i><span class="t-ar">يُمنع التصوير والفيديو</span><span class="t-tr" lang="tr">Fotoğraf ve video yasaktır</span></li>
         </ul>
-        <p class="n-thanks"><span class="t-ar">حرصاً على راحتكم وراحة الجميع، شاكرين تفهّمكم 🤍</span><span class="t-tr" lang="tr">Herkesin konforu için, anlayışınız için teşekkür ederiz 🤍</span></p>
-      </div>
-    </div>
   </section>
 
-  <!-- ===== RSVP ===== -->
-  <section class="sheet rv" id="rsvp">
-    <div class="sep"><i></i></div>
-    <div class="inner">
-      <h2><span class="t-ar">تأكيد الحضور</span><span class="t-tr" lang="tr">Katılım Teyidi</span></h2>
-      <div class="divider"><i></i></div>
-      <p class="txt"><span class="t-ar">يسعدنا تأكيد حضوركم لمشاركتنا فرحتنا.</span><span class="t-tr" lang="tr">Mutluluğumuzu paylaşmak üzere katılımınızı teyit etmeniz bizi memnun edecektir.</span></p>
+  <div class="v3-div"><svg class="fl" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="6.6" rx="3.3" ry="4.6"/><ellipse cx="12" cy="17.4" rx="3.3" ry="4.6"/><ellipse cx="6.6" cy="12" rx="4.6" ry="3.3"/><ellipse cx="17.4" cy="12" rx="4.6" ry="3.3"/></g><circle cx="12" cy="12" r="2.2" fill="#f2e2df"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/></svg></div>
+
+  <!-- RSVP: a single button first; the form opens on tap -->
+  <section class="v3-sec rv" id="rsvp">
+    <h3 class="rs-title"><span class="t-ar">تأكيد الحضور</span><span class="t-tr" lang="tr">KATILIM ONAYI</span></h3>
+    <button class="v3-btn rs-open" id="rs-open" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>
+      <span class="t-ar">تأكيد الحضور</span><span class="t-tr" lang="tr">Katılımınızı Onaylayın</span>
+    </button>
+    <div class="rs-panel">
       <div class="rsvp-form">
         <label class="field"><span><span class="t-ar">الاسم الكريم</span><span class="t-tr">Adınız Soyadınız</span></span>
           <input id="r-name" autocomplete="name" maxlength="60"></label>
@@ -527,20 +667,18 @@ html[data-lang=tr] .autoscroll{font:600 15px var(--lat)}
           </div>
         </div>
         <button id="r-change"><span class="t-ar">تغيير الرد</span><span class="t-tr">Yanıtı değiştir</span></button></div>
+    
     </div>
   </section>
-  <img class="corner l" src="assets/corner-l.webp" alt="">
-  <img class="corner r" src="assets/corner-r.webp" alt="">
-</div>
-</main>
 
-<footer class="rv">
-  <div class="fnames">
-    <p class="thanks"><b class="t-ar">بوجودكم تكتمل المسرات</b><b class="t-tr" lang="tr">Katılımınızla mutluluğumuz tamamlanacak.</b></p>
-    <div class="names-lat">Oday <span class="amp">&</span> Asmaa</div>
-  </div>
-  <img src="assets/roses-strip.webp" alt="">
-</footer>
+  <div class="v3-div"><svg class="fl" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="6.6" rx="3.3" ry="4.6"/><ellipse cx="12" cy="17.4" rx="3.3" ry="4.6"/><ellipse cx="6.6" cy="12" rx="4.6" ry="3.3"/><ellipse cx="17.4" cy="12" rx="4.6" ry="3.3"/></g><circle cx="12" cy="12" r="2.2" fill="#f2e2df"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/></svg></div>
+
+  <section class="v3-sec rv v3-end">
+    <p class="e-ar"><span class="t-ar">بوجودكم تكتمل المسرات</span><span class="t-tr" lang="tr">Varlığınızla mutluluğumuz tamamlanır</span></p>
+    <div class="e-lat" lang="tr">Oday <i>&amp;</i> Asmaa</div>
+  </section>
+  <span class="corner-fl bl"><svg class="fl" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="6.6" rx="3.3" ry="4.6"/><ellipse cx="12" cy="17.4" rx="3.3" ry="4.6"/><ellipse cx="6.6" cy="12" rx="4.6" ry="3.3"/><ellipse cx="17.4" cy="12" rx="4.6" ry="3.3"/></g><circle cx="12" cy="12" r="2.2" fill="#f2e2df"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/></svg></span><span class="corner-fl br"><svg class="fl" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="6.6" rx="3.3" ry="4.6"/><ellipse cx="12" cy="17.4" rx="3.3" ry="4.6"/><ellipse cx="6.6" cy="12" rx="4.6" ry="3.3"/><ellipse cx="17.4" cy="12" rx="4.6" ry="3.3"/></g><circle cx="12" cy="12" r="2.2" fill="#f2e2df"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/></svg></span>
+</main>
 
 <script src="config.js"></script>
 <script>
@@ -650,6 +788,14 @@ function layoutIntro(){
   st.setProperty('--pf', px((P.y1 - P.y0) * k * .30));
 }
 layoutIntro(); addEventListener('resize', layoutIntro);
+/* the text area inside the oval of the tulip art (image 1080x1920), mapped to the screen like object-fit: cover */
+function layoutHero(){
+  const vw = hero.clientWidth, vh = hero.clientHeight, k = Math.max(vw / 1080, vh / 1920);
+  const ox = (vw - 1080 * k) / 2, oy = (vh - 1920 * k) / 2, st = hero.style, px = v => v.toFixed(1) + 'px';
+  st.setProperty('--hx', px(ox + 250 * k)); st.setProperty('--hy', px(oy + 300 * k));
+  st.setProperty('--hw', px(580 * k)); st.setProperty('--hh', px(1230 * k)); st.setProperty('--hk', k.toFixed(4));
+}
+layoutHero(); addEventListener('resize', layoutHero);
 function startIntro(){ hero.classList.add('needs-tap'); }
 let opened = false;
 function openInvitation(){
@@ -774,7 +920,7 @@ const Petals = window.Petals = (()=>{
     if(running || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     size(); const n = Math.max(12, Math.min(28, Math.round(W / 24)));
     items = Array.from({length:n}, ()=>make(true));
-    running = true; last = 0; cv.classList.add('on'); $('#shadows').classList.add('on');
+    running = true; last = 0; cv.classList.add('on');
     requestAnimationFrame(frame);
   }
   addEventListener('resize', ()=>{ if(running) size(); });
@@ -843,6 +989,7 @@ document.querySelectorAll('.rsvp-actions .btn').forEach(btn=>btn.addEventListene
   }catch(e){ rMsg.textContent = T[lang].fail; }
   finally{ sending = false; btns.forEach(b=>b.disabled=false); }
 }));
+$('#rs-open').addEventListener('click',()=>{ rsvp.classList.add('open'); setTimeout(()=>rName.focus({preventScroll:true}), 350); });
 rName.addEventListener('input',()=>{ rMsg.textContent=''; rName.classList.remove('err'); });
 $('#r-change').addEventListener('click',()=>{ const st = store.get('inv_rsvp'); if(st) rName.value = st.name; try{ localStorage.removeItem('inv_rsvp'); }catch(e){} renderRsvp(); });
 
