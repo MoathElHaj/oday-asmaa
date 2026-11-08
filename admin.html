@@ -360,7 +360,7 @@ function detail(g){
   return '';
 }
 const link = g => SITE_URL + '?g=' + g.code;
-const seatsAr = n => n == 1 ? 'شخص واحد' : n == 2 ? 'شخصين' : n <= 10 ? n + ' أشخاص' : n + ' شخصاً';
+const seatsAr = n => n == 1 ? 'لشخص واحد' : n == 2 ? 'لشخصين' : n <= 10 ? 'لـ ' + n + ' أشخاص' : 'لـ ' + n + ' شخصاً';
 const fmtPhone = p => p ? '+' + p : '';
 
 function renderGuests(){
@@ -413,7 +413,7 @@ const DEF = {
 
 📅 الخميس 10/12/2026 – الساعة 7:00 مساءً
 📍 قاعة إنجي للأفراح – Başakşehir / İstanbul
-👥 الدعوة لـ {العدد}
+👥 الدعوة {العدد}
 
 دعوتكم الخاصة وتأكيد الحضور من هنا:
 {الرابط}`,
