@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="ar" dir="rtl" data-lang="ar">
+<html lang="ar" dir="rtl" translate="no" class="notranslate" data-lang="ar">
 <head>
 <meta charset="utf-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#4a0d1c">
 <title>عدي & أسماء · Oday & Asmaa</title>
@@ -478,8 +479,14 @@ html[data-lang=tr] .v3-lead-tr{color:var(--bur);margin-top:2px}
 .v3-venue h3 [lang=tr]{letter-spacing:1.5px}
 .v-tr{font:400 17px/1.4 var(--bask);letter-spacing:1.5px;color:var(--bur)}
 .v-addr{margin-top:6px;font:400 15.5px/1.6 var(--bask);color:var(--bur-s)}
-.v-note{display:inline-block;margin-top:10px;padding:4px 18px;border:1px solid rgba(90,16,36,.3);border-radius:30px;font:500 14.5px/1.6 var(--ar);color:var(--bur)}
+.v-note{display:inline-block;margin-top:12px;padding:4px 18px;border:1px solid rgba(90,16,36,.3);border-radius:30px;font:500 14.5px/1.6 var(--ar);color:var(--bur)}
 .v-note [lang=tr]{font-family:var(--bask);font-size:14.5px}
+.v-halls{margin-top:8px;font:600 15.5px/1.75 var(--ar);color:var(--bur)}
+.v-halls > span > span{display:block;white-space:nowrap}
+.v-halls [lang=tr]{font-family:var(--bask);font-weight:600}
+.v-halls .num{font-size:1.05em}
+.v3-venue .v-note,.v3-venue .v3-btn{display:flex;width:fit-content;margin-inline:auto}
+.v3-venue .v3-btn{margin-top:16px}
 .v3-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;min-height:48px;padding:10px 26px;border-radius:40px;border:1px solid var(--bur-d);
   background:linear-gradient(180deg,#6a1530,var(--bur-d));color:#fbeef0;font:600 16px var(--ar);text-decoration:none;cursor:pointer;
   box-shadow:0 0 0 3px rgba(255,248,246,.6),0 0 0 4px rgba(90,16,36,.35),0 10px 20px -10px rgba(69,9,26,.7);transition:transform .15s}
@@ -553,7 +560,7 @@ html[data-lang=tr] .rsvp-done .v3-btn{font:400 16px var(--bask)}
   .v3-bless{font-size:14.5px} .v3-lead-tr{font-size:15px} .v3-caps{font-size:13px;letter-spacing:1.5px}
   .dg-side b{font-size:17px} .dg-side b[lang=tr]{font-size:14.5px;letter-spacing:.5px} .dg-side span,.dg-side span[lang=tr]{font-size:13.5px}
   .dg-day{font-size:52px;padding:6px 14px}
-  .v-note{font-size:13px;padding-inline:12px} .v-addr{font-size:14.5px}
+  .v-note{font-size:13px;padding-inline:12px} .v-addr{font-size:14.5px} .v-halls{font-size:14.5px}
   .v3 h3{font-size:22px} .v3 h3 [lang=tr]{font-size:19px}
 }
 /* Turkish lines keep left-to-right punctuation even inside the Arabic page */
@@ -654,6 +661,7 @@ html[data-lang=tr] .rsvp-done .v3-btn{font:400 16px var(--bask)}
     <p class="v-tr t-ar" lang="tr">İNCİ Düğün Salonu</p>
     <p class="v-addr" lang="tr">Başakşehir Mah.<br>Hürriyet Bulvarı No: 76<br>Başakşehir / İstanbul</p>
     <p class="v-note"><span class="t-ar">فوق مطعم عزيزان · الطابق الخامس</span><span class="t-tr" lang="tr">Azizan Restoranı'nın üstü · 5. Kat</span></p>
+    <p class="v-halls"><span class="t-ar"><span>( الرجال - صالة <span class="num">3</span> )</span><span>( النساء - صالة <span class="num">4</span> )</span></span><span class="t-tr" lang="tr"><span>( Erkekler - Salon <span class="num">3</span> )</span><span>( Kadınlar - Salon <span class="num">4</span> )</span></span></p>
     <a class="v3-btn" id="maps-link" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
       <span class="t-ar">عرض الموقع على الخريطة</span><span class="t-tr" lang="tr">Konumu Haritada Gör</span>
