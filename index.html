@@ -145,6 +145,8 @@ html[data-lang=tr] .scroll-hint #days-left{font-family:var(--lat);font-weight:60
 .music{width:42px;height:42px;justify-content:center;padding:0;cursor:pointer;color:var(--gold-d)}
 .music svg{width:18px;height:18px}
 .music.playing svg{animation:spin 6s linear infinite}
+#music-btn{position:fixed;z-index:41;left:calc(14px + env(safe-area-inset-left));bottom:calc(16px + env(safe-area-inset-bottom));opacity:0;pointer-events:none;transition:opacity .6s}
+.topbar.show ~ #music-btn{opacity:1;pointer-events:auto}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ================= PAPER CARDS ================= */
@@ -492,6 +494,18 @@ html[data-lang=tr] .v3-notes li{font:400 13.5px/1.45 var(--bask)}
 .v3-notes .n-ic svg{width:19px;height:19px}
 
 #rsvp .rs-title{margin-bottom:4px}
+/* personal link: who the invitation is for */
+.guest-tag{position:absolute;z-index:5;top:calc(16px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:max-content;max-width:86vw;text-align:center;
+  padding:7px 22px 9px;border-radius:18px;background:linear-gradient(180deg,rgba(250,238,228,.95),rgba(243,224,209,.95));border:1.5px solid #b08a4a;color:#6a1426;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 10px 24px -12px rgba(90,40,30,.55);pointer-events:none;transition:opacity .45s;animation:rsin .7s ease}
+.guest-tag small{display:block;font:700 13px/1.5 var(--ar-d);opacity:.75;letter-spacing:.2px}
+.guest-tag b{display:block;font:700 21px/1.45 var(--ar-d);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html[data-lang=tr] .guest-tag small{font:italic 400 13px/1.5 var(--bask)}
+.hero.opening .guest-tag{opacity:0}
+.rs-guest{margin:6px auto 2px;font:700 16px/1.7 var(--ar-d);color:var(--bur-s)}
+.rs-guest b{color:var(--bur)}
+html[data-lang=tr] .rs-guest{font:400 15px/1.7 var(--bask)}
+#rsvp input[readonly]{background:#f8efec;color:var(--bur);font-weight:700}
 #rsvp:not(.open):not(.answered) .rs-panel{display:none}
 #rsvp.open .rs-open,#rsvp.answered .rs-open{display:none}
 #rsvp .rs-panel{margin:14px auto 0;max-width:360px;padding:20px 16px;border-radius:16px;background:rgba(255,250,248,.6);box-shadow:0 0 0 1px rgba(90,16,36,.18) inset;animation:rsin .45s ease}
@@ -551,12 +565,13 @@ html[data-lang=tr] .rsvp-done .v3-btn{font:400 16px var(--bask)}
 <section class="hero" id="hero">
   <img class="end" src="assets/hero-tulips.jpg" alt="" aria-hidden="true">
   <div class="doors" aria-hidden="true"><div class="door l"><i></i><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5V5.2a1.6 1.6 0 0 1 3.2 0v5.3"/><path d="M12.2 10.2V9.1a1.6 1.6 0 0 1 3.2 0v1.6"/><path d="M15.4 10.4a1.6 1.6 0 0 1 3.2 0v3.8a6.3 6.3 0 0 1-6.3 6.3h-.6a6 6 0 0 1-4.6-2.2l-2.6-3.3a1.6 1.6 0 0 1 2.4-2.1L9 14.5"/><path d="M5.5 4.5 4 3M14.5 4.5 16 3M10.6 1.6V0"/></svg><b class="t-ar">المس الختم لفتح دعوتنا</b><b class="t-tr" lang="tr">Açmak için mühre dokunun</b></span></div><div class="door r"><i></i><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5V5.2a1.6 1.6 0 0 1 3.2 0v5.3"/><path d="M12.2 10.2V9.1a1.6 1.6 0 0 1 3.2 0v1.6"/><path d="M15.4 10.4a1.6 1.6 0 0 1 3.2 0v3.8a6.3 6.3 0 0 1-6.3 6.3h-.6a6 6 0 0 1-4.6-2.2l-2.6-3.3a1.6 1.6 0 0 1 2.4-2.1L9 14.5"/><path d="M5.5 4.5 4 3M14.5 4.5 16 3M10.6 1.6V0"/></svg><b class="t-ar">المس الختم لفتح دعوتنا</b><b class="t-tr" lang="tr">Açmak için mühre dokunun</b></span></div></div>
+  <div class="guest-tag" id="guest-tag" hidden><small><span class="t-ar">دعوة خاصة إلى</span><span class="t-tr" lang="tr">Özel Davetiye</span></small><b id="gt-name"></b></div>
   <div class="hero-text">
     <img class="bism" src="assets/bismillah.webp" alt="بسم الله الرحمن الرحيم">
     <p class="h-pre"><span class="t-ar">بفضل من الله ورعايته</span><span class="t-tr" lang="tr">Aileleriyle birlikte,</span></p>
     <div class="h-names t-ar"><b>عُدَيّ</b><i>&amp;</i><b>أَسْمَاء</b></div>
     <div class="h-names-lat t-tr" lang="tr"><b>Oday</b><i>VE</i><b>Asmaa</b></div>
-    <p class="h-inv"><span class="t-ar">يسرّنا دعوتكم لحضور حفل زفافنا</span><span class="t-tr" lang="tr">Sizleri düğünlerine davet ediyorlar</span></p>
+    <p class="h-inv"><span class="t-ar">نتشرّف بدعوتكم لحضور حفل الزفاف<br>وتناول وجبة العشاء</span><span class="t-tr" lang="tr">Düğün törenimize ve<br>akşam yemeğine davetlisiniz</span></p>
     <p class="h-date"><span class="t-ar">الخميس <span class="num">10/12/2026</span> <em>|</em> الساعة <span class="num">7:00</span> مساءً</span><span class="t-tr" lang="tr">Perşembe, 10 Aralık 2026 <em>|</em> 19:00</span></p>
     <p class="h-venue"><span class="t-ar">قاعة إنجي للأفراح</span><span class="t-tr" lang="tr">İnci Düğün Salonu</span></p>
     <p class="h-city" lang="tr">Başakşehir / İstanbul</p>
@@ -575,10 +590,11 @@ html[data-lang=tr] .rsvp-done .v3-btn{font:400 16px var(--bask)}
     <button class="ar-btn" data-set-lang="ar">ع</button>
     <button data-set-lang="tr">TR</button>
   </div>
+</div>
   <button class="pill music" id="music-btn" aria-label="Music" hidden>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
   </button>
-</div>
+
 <audio id="bg-music" loop preload="none"></audio>
 <button class="autoscroll" id="autoscroll" type="button">
   <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
@@ -593,7 +609,7 @@ html[data-lang=tr] .rsvp-done .v3-btn{font:400 16px var(--bask)}
   <section class="v3-sec rv v3-top">
     <span class="v3-calli t-ar" role="img" aria-label="بارك الله لهما وبارك عليهما وجمع بينهما في خير"></span>
     <p class="v3-bless t-tr" lang="tr">Allah onlar için mübarek kılsın, onlara bereket versin ve onları hayırda bir araya getirsin.</p>
-    <p class="v3-lead t-ar">بفضل من الله ورعايته يسرّنا دعوتكم<br>لمشاركتنا فرحتنا في حفل زفافنا</p>
+    <p class="v3-lead t-ar">بفضل من الله ورعايته نتشرّف بدعوتكم<br>لحضور حفل الزفاف وتناول وجبة العشاء</p>
     <p class="v3-caps t-tr" lang="tr">Allah'ın lütfu ve inayetiyle</p>
     <p class="v3-lead-tr" lang="tr"><span class="t-ar">Sizleri düğün yemeğimize ve törenimize davet etmekten onur duyarız.</span><span class="t-tr">Sizleri düğün yemeğimize ve törenimize davet etmekten onur duyarız.</span></p>
   </section>
@@ -659,6 +675,7 @@ html[data-lang=tr] .rsvp-done .v3-btn{font:400 16px var(--bask)}
   <!-- RSVP: a single button first; the form opens on tap -->
   <section class="v3-sec rv" id="rsvp">
     <h3 class="rs-title"><span class="t-ar">تأكيد الحضور</span><span class="t-tr" lang="tr">KATILIM ONAYI</span></h3>
+    <p class="rs-guest" id="rs-guest" hidden></p>
     <button class="v3-btn rs-open" id="rs-open" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>
       <span class="t-ar">تأكيد الحضور</span><span class="t-tr" lang="tr">Katılımınızı Onaylayın</span>
@@ -667,7 +684,7 @@ html[data-lang=tr] .rsvp-done .v3-btn{font:400 16px var(--bask)}
       <div class="rsvp-form">
         <label class="field"><span><span class="t-ar">الاسم الكريم</span><span class="t-tr">Adınız Soyadınız</span></span>
           <input id="r-name" autocomplete="name" maxlength="60"></label>
-        <div class="field"><span><span class="t-ar">عدد الحضور</span><span class="t-tr">Kişi sayısı</span></span>
+        <div class="field" id="count-field"><span><span class="t-ar">عدد الحضور</span><span class="t-tr">Kişi sayısı</span></span>
           <div class="stepper"><button type="button" data-step="-1" aria-label="-">−</button><output id="r-count">1</output><button type="button" data-step="1" aria-label="+">+</button></div></div>
         <p class="rsvp-msg" id="r-msg"></p>
         <div class="rsvp-actions">
@@ -721,7 +738,7 @@ const CONFIG = {
   eventEnd:   '2026-12-11T00:00:00+03:00',
   mapsUrl: 'https://maps.app.goo.gl/pshaHFvhGFTZqBgW9',
   address: 'İNCİ Düğün Salonu, Başakşehir Mah. Hürriyet Bulvarı No: 76 (Azizan Restaurant Üstü 5. Kat), Başakşehir / İstanbul',
-  musicUrl: 'assets/music.m4a',
+  musicUrl: 'assets/music.m4a?v=2',
   musicVolume: 0.7,
   // Google Apps Script Web App URL — set it in config.js (see SETUP-AR.md)
   rsvpEndpoint: (window.SITE && window.SITE.rsvpEndpoint) || '',
@@ -749,10 +766,12 @@ const T = {
   ar:{ asPause:'إيقاف التمرير', asPlay:'تمرير تلقائي', soon:'باقي أقل من يوم… نراكم غداً 🤍', today:'اليوم يوم الفرح 🤍 بانتظاركم', after:'شكراً لمشاركتكم فرحتنا 🤍',
        needName:'فضلاً اكتب الاسم أولاً', confirmNo:'هل تؤكد الاعتذار عن الحضور؟', sending:'جارٍ الإرسال…', fail:'تعذّر الإرسال، تأكد من الإنترنت وحاول مرة أخرى',
        yes:(n,c)=>`شكراً ${n} 🤍<br>بانتظار تشريفكم${c>1?` (${c} أشخاص)`:''}`, no:n=>`شكراً ${n} 🤍<br>تم تسجيل اعتذاركم`,
+       guest:(n,a)=>a>1?`دعوتكم مخصّصة لـ <b>${n}</b><br>لعدد <b>${a}</b> أشخاص`:`دعوتكم مخصّصة لـ <b>${n}</b>`,
        wa:(n,c,y)=>y?`مرحباً، أنا ${n} — أؤكد حضوري لحفل زفاف عدي وأسماء (عدد الحضور: ${c}) 🤍`:`مرحباً، أنا ${n} — أعتذر عن حضور حفل زفاف عدي وأسماء، مع أطيب التمنيات 🤍` },
   tr:{ asPause:'Kaydırmayı durdur', asPlay:'Otomatik kaydır', soon:'Bir günden az kaldı… Yarın görüşmek üzere 🤍', today:'Bugün düğün günümüz 🤍 Sizi bekliyoruz', after:'Mutluluğumuzu paylaştığınız için teşekkürler 🤍',
        needName:'Lütfen önce adınızı yazın', confirmNo:'Katılamayacağınızı onaylıyor musunuz?', sending:'Gönderiliyor…', fail:'Gönderilemedi, internet bağlantınızı kontrol edip tekrar deneyin',
        yes:(n,c)=>`Teşekkürler ${n} 🤍<br>Sizi bekliyoruz${c>1?` (${c} kişi)`:''}`, no:n=>`Teşekkürler ${n} 🤍<br>Yanıtınız kaydedildi`,
+       guest:(n,a)=>a>1?`Bu davetiye <b>${n}</b> için<br><b>${a}</b> kişiliktir`:`Bu davetiye <b>${n}</b> içindir`,
        wa:(n,c,y)=>y?`Merhaba, ben ${n} — Oday & Asmaa'nın düğününe katılacağım (${c} kişi) 🤍`:`Merhaba, ben ${n} — Oday & Asmaa'nın düğününe maalesef katılamayacağım, en iyi dileklerimle 🤍` }
 };
 let lang = (()=>{
@@ -1118,12 +1137,16 @@ const Card = (()=>{
 
 /* ---------- RSVP ---------- */
 const rName = $('#r-name'), rMsg = $('#r-msg'), rsvp = $('#rsvp');
-let count = 1, sending = false;
-document.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>{ count = Math.min(10, Math.max(1, count + +b.dataset.step)); $('#r-count').textContent = count; }));
+let count = 1, sending = false, maxCount = 10;
+document.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>{ count = Math.min(maxCount, Math.max(1, count + +b.dataset.step)); $('#r-count').textContent = count; }));
+/* personal link (?g=CODE): the family's name and allowed seats come from the guest list */
+const GCODE = (new URLSearchParams(location.search).get('g') || '').trim().toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);
+let guest = null;
 const esc = s => String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function renderRsvp(){
   const st = store.get('inv_rsvp');
   rsvp.classList.toggle('answered', !!st);
+  if(guest){ $('#rs-guest').innerHTML = T[lang].guest(esc(guest.name), guest.allowed); $('#rs-guest').hidden = false; }
   if(st) $('#r-done').innerHTML = st.v==='yes' ? T[lang].yes(esc(st.name), st.count) : T[lang].no(esc(st.name));
   $('#after-yes').hidden = !(st && st.v==='yes');
   if(st && st.v==='yes') Card.show(st);
@@ -1140,13 +1163,13 @@ document.querySelectorAll('.rsvp-actions .btn').forEach(btn=>btn.addEventListene
   if(!yes && !confirm(T[lang].confirmNo)) return;
   if(sending) return; sending = true;
   const btns = document.querySelectorAll('.rsvp-actions .btn'); btns.forEach(b=>b.disabled=true);
-  const state = {v: yes?'yes':'no', name, count: yes?count:0, lang};
+  const state = {v: yes?'yes':'no', name, count: yes?count:0, lang, g: guest ? guest.code : ''};
   try{
     if(CONFIG.rsvpEndpoint){
       rMsg.textContent = T[lang].sending;
       // text/plain avoids a CORS preflight, which Google Apps Script does not answer
       const r = await fetch(CONFIG.rsvpEndpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
-        body:JSON.stringify({action:'rsvp', deviceId:deviceId(), name, attending:yes, count:state.count, lang})});
+        body:JSON.stringify({action:'rsvp', deviceId:deviceId(), name, attending:yes, count:state.count, lang, g: guest ? guest.code : undefined})});
       const j = await r.json().catch(()=>({}));
       if(!r.ok || !j.ok) throw 0;
       if(j.code) state.code = j.code;
@@ -1164,6 +1187,28 @@ rName.addEventListener('input',()=>{ rMsg.textContent=''; rName.classList.remove
 $('#r-change').addEventListener('click',()=>{ const st = store.get('inv_rsvp'); if(st) rName.value = st.name; try{ localStorage.removeItem('inv_rsvp'); }catch(e){} renderRsvp(); });
 
 setLang(lang);
+
+async function loadGuest(){
+  if(!GCODE || !CONFIG.rsvpEndpoint) return;
+  try{
+    const qs = new URLSearchParams(location.search);
+    const r = await fetch(CONFIG.rsvpEndpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({action:'guest', g:GCODE, preview: qs.has('preview')})});
+    const j = await r.json();
+    if(!j.ok || !j.found) return;
+    guest = j;
+    $('#gt-name').textContent = j.name; $('#guest-tag').hidden = false;
+    rName.value = j.name; rName.readOnly = true;
+    maxCount = Math.max(1, j.allowed || 1); count = Math.min(count, maxCount); $('#r-count').textContent = count;
+    $('#count-field').hidden = maxCount === 1;
+    // the server's answer wins, so the family sees the same reply and card on every phone
+    const st = store.get('inv_rsvp');
+    if(j.reply) store.set('inv_rsvp', {v: j.reply.attending ? 'yes' : 'no', name: j.name, count: j.reply.count, lang, code: j.reply.code, g: j.code});
+    else if(st && st.g !== j.code){ try{ localStorage.removeItem('inv_rsvp'); }catch(e){} }
+    if(!qs.get('lang') && j.lang !== lang) setLang(j.lang); else renderRsvp();
+  }catch(e){}
+}
+loadGuest();
 </script>
 </body>
 </html>

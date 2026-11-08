@@ -5,130 +5,326 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#ece6dd">
-<title>لوحة الردود · عدي & أسماء</title>
+<title>لوحة التحكم · عدي & أسماء</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@500&family=Noto+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@500&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#ebe5dc;--paper:#f7f3ed;--ink:#4f4034;--soft:#8a7a6b;--gold:#b4975f;--gold-d:#94784a;--line:rgba(180,151,95,.4);--yes:#5f8a5a;--no:#b0645a}
+:root{--bg:#ebe5dc;--paper:#f7f3ed;--ink:#4f4034;--soft:#8a7a6b;--gold:#b4975f;--gold-d:#94784a;--line:rgba(180,151,95,.4);
+  --yes:#4f8a52;--no:#b0645a;--open:#c08a2e;--sent:#4a7bb0;--new:#9a8f84;--wa:#25a35a}
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:"Noto Sans Arabic",system-ui,sans-serif;font-variant-numeric:lining-nums tabular-nums;min-height:100vh;-webkit-font-smoothing:antialiased}
-.wrap{max-width:920px;margin:0 auto;padding:calc(20px + env(safe-area-inset-top)) 16px 40px}
-header{text-align:center;margin-bottom:22px}
+.wrap{max-width:1040px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 14px 60px}
+header{text-align:center;margin-bottom:16px}
 header h1{font-family:Amiri,serif;font-size:30px;color:var(--gold-d)}
-header p{color:var(--soft);font-size:14px}
-.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px -14px rgba(110,90,60,.3)}
-/* login */
+header p{color:var(--soft);font-size:13px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 30px -16px rgba(110,90,60,.3)}
 .login{max-width:360px;margin:12vh auto 0;padding:28px 22px;text-align:center}
 .login h1{font-family:Amiri,serif;color:var(--gold-d);font-size:26px;margin-bottom:6px}
 .login p{color:var(--soft);font-size:14px;margin-bottom:18px}
-input[type=password],input[type=search]{width:100%;border:1px solid var(--line);background:#fffdf9;border-radius:8px;padding:12px 14px;font:16px inherit;font-family:inherit;color:var(--ink);outline:none}
-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(180,151,95,.18)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:8px 18px;border-radius:30px;border:1px solid var(--gold);background:linear-gradient(180deg,#c3a56d,var(--gold-d));color:#fff;font:600 15px inherit;font-family:inherit;cursor:pointer;text-decoration:none;white-space:nowrap}
+input,select,textarea{width:100%;border:1px solid var(--line);background:#fffdf9;border-radius:8px;padding:11px 13px;font:16px inherit;font-family:inherit;color:var(--ink);outline:none}
+textarea{min-height:190px;line-height:1.7;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(180,151,95,.18)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:8px 16px;border-radius:30px;border:1px solid var(--gold);background:linear-gradient(180deg,#c3a56d,var(--gold-d));color:#fff;font:600 14.5px inherit;font-family:inherit;cursor:pointer;text-decoration:none;white-space:nowrap}
 .btn.ghost{background:transparent;color:var(--gold-d)}
-.btn:disabled{opacity:.6}
+.btn.wa{background:var(--wa);border-color:var(--wa)}
+.btn.wa.remind{background:#fff;color:var(--wa)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn:disabled{opacity:.55;cursor:default}
 .login .btn{width:100%;margin-top:12px}
-.err{color:var(--no);font-size:14px;min-height:20px;margin-top:10px}
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.stat{padding:16px 10px;text-align:center}
-.stat b{display:block;font:500 32px/1.15 "Playfair Display",serif;color:var(--gold-d)}
-.stat span{font-size:13px;color:var(--soft)}
-.stat.yes b{color:var(--yes)} .stat.no b{color:var(--no)}
-@media (max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
-/* toolbar */
-.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px;margin-bottom:12px}
-.toolbar input{flex:1 1 200px}
-.seg{display:flex;border:1px solid var(--line);border-radius:30px;padding:3px;background:#fffdf9}
-.seg button{border:0;background:none;padding:7px 14px;border-radius:30px;font:500 14px inherit;font-family:inherit;color:var(--soft);cursor:pointer}
+.err{color:var(--no);font-size:14px;min-height:20px;margin-top:6px}
+.tabs{display:flex;justify-content:center;margin:0 auto 16px;width:max-content;border:1px solid var(--line);border-radius:40px;padding:4px;background:var(--paper)}
+.tabs button{border:0;background:none;padding:9px 22px;border-radius:30px;font:600 15px inherit;font-family:inherit;color:var(--soft);cursor:pointer}
+.tabs button.on{background:var(--gold);color:#fff}
+.tabs i{font-style:normal;font-size:12px;opacity:.8;margin-inline-start:4px}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:10px}
+.stats.four{grid-template-columns:repeat(4,1fr)}
+.stat{padding:12px 6px;text-align:center;transition:transform .15s,box-shadow .15s;position:relative}
+#g-stats .stat{cursor:pointer}
+#g-stats .stat:hover{transform:translateY(-2px)}
+.stat.on{box-shadow:0 0 0 2px var(--c,var(--gold)) inset}
+.stat b{display:block;font:500 28px/1.15 "Playfair Display",serif;color:var(--c,var(--gold-d))}
+.stat span{font-size:12.5px;color:var(--soft)}
+.stat small{display:block;font-size:11.5px;color:var(--soft);opacity:.85}
+.stat.s-yes{--c:var(--yes)} .stat.s-no{--c:var(--no)} .stat.s-open{--c:var(--open)} .stat.s-sent{--c:var(--sent)} .stat.s-new{--c:var(--new)}
+@media (max-width:760px){.stats{grid-template-columns:repeat(3,1fr)}.stats.four{grid-template-columns:repeat(2,1fr)}}
+.bar{display:flex;height:10px;border-radius:10px;overflow:hidden;background:#e4dccf;margin:0 2px 14px}
+.bar i{display:block;height:100%;transition:width .5s}
+.bar .yes{background:var(--yes)} .bar .no{background:var(--no)} .bar .open{background:var(--open)} .bar .sent{background:var(--sent)} .bar .new{background:#cfc6ba}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px;margin-bottom:10px}
+.toolbar input{flex:1 1 220px}
+.seg{display:flex;border:1px solid var(--line);border-radius:30px;padding:3px;background:#fffdf9;overflow-x:auto;max-width:100%}
+.seg button{border:0;background:none;padding:7px 13px;border-radius:30px;font:500 13.5px inherit;font-family:inherit;color:var(--soft);cursor:pointer;white-space:nowrap}
 .seg button.on{background:var(--gold);color:#fff}
 .actions{display:flex;gap:8px;flex-wrap:wrap}
-/* list */
+.next{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;margin-bottom:10px;background:#eef6f0;border-color:rgba(37,163,90,.35)}
+.next p{flex:1;font-size:14px;min-width:180px}
+.next b{color:var(--wa)}
 .list{overflow:hidden}
 table{width:100%;border-collapse:collapse;font-size:15px}
-th{font-weight:600;font-size:13px;color:var(--soft);text-align:start;padding:12px;border-bottom:1px solid var(--line);background:#f2ece3}
-td{padding:12px;border-bottom:1px solid rgba(180,151,95,.15);vertical-align:middle}
+th{font-weight:600;font-size:12.5px;color:var(--soft);text-align:start;padding:10px 12px;border-bottom:1px solid var(--line);background:#f2ece3;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid rgba(180,151,95,.15);vertical-align:middle}
 tr:last-child td{border-bottom:0}
-.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:13px;font-weight:600}
-.tag.yes{background:rgba(95,138,90,.12);color:var(--yes)} .tag.no{background:rgba(176,100,90,.12);color:var(--no)}
-.muted{color:var(--soft);font-size:13px}
-.code{display:inline-block;margin-inline-start:6px;padding:0 8px;border-radius:6px;background:#f2ece3;color:var(--gold-d);font:600 12px ui-monospace,Menlo,monospace;letter-spacing:1px;vertical-align:middle}
-.del{border:0;background:none;color:var(--soft);cursor:pointer;font-size:18px;padding:4px 8px;border-radius:6px}
-.del:hover{color:var(--no);background:rgba(176,100,90,.08)}
-.empty{padding:40px 16px;text-align:center;color:var(--soft)}
-@media (max-width:640px){
+tr.flash td{animation:flash 1.6s ease}
+@keyframes flash{from{background:rgba(37,163,90,.18)}to{background:transparent}}
+.tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:12.5px;font-weight:600;white-space:nowrap;color:var(--c);background:color-mix(in srgb,var(--c) 13%,transparent)}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+.tag.yes{--c:var(--yes)} .tag.no{--c:var(--no)} .tag.open{--c:var(--open)} .tag.sent{--c:var(--sent)} .tag.new{--c:var(--new)}
+.muted{color:var(--soft);font-size:12.5px}
+.nm{font-weight:600}
+.grp{display:inline-block;margin-inline-start:6px;padding:0 8px;border-radius:6px;background:#efe7da;color:var(--soft);font-size:12px;font-weight:500}
+.code{display:inline-block;margin-inline-start:6px;padding:0 7px;border-radius:6px;background:#f2ece3;color:var(--gold-d);font:600 11.5px ui-monospace,Menlo,monospace;letter-spacing:1px;vertical-align:middle}
+.phone{direction:ltr;unicode-bidi:isolate;font-size:14px;white-space:nowrap}
+.seats b{font:500 17px "Playfair Display",serif}
+.ic{border:0;background:none;color:var(--soft);cursor:pointer;padding:6px;border-radius:8px;display:inline-grid;place-items:center}
+.ic svg{width:18px;height:18px}
+.ic:hover{color:var(--gold-d);background:rgba(180,151,95,.12)}
+.ic.del:hover{color:var(--no);background:rgba(176,100,90,.08)}
+.row-act{display:flex;align-items:center;gap:2px;justify-content:flex-end}
+.row-act .btn{min-height:34px;padding:5px 12px;font-size:13.5px}
+.empty{padding:40px 16px;text-align:center;color:var(--soft);line-height:1.9}
+@media (max-width:720px){
   thead{display:none}
   table,tbody,tr,td{display:block;width:100%}
-  tr{display:grid;grid-template-columns:auto auto 1fr auto;gap:4px 14px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(180,151,95,.18)}
+  tr{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(180,151,95,.18)}
   td{padding:0;border:0}
-  td.c-name{grid-column:1/4;font-weight:600;font-size:16px}
-  td.c-status{grid-row:1;grid-column:4;text-align:end}
-  td.c-count,td.c-lang,td.c-time{grid-row:2;font-size:13px;color:var(--soft)}
-  td.c-del{grid-row:2;grid-column:4;text-align:end}
+  td.c-name{grid-column:1}
+  td.c-status{grid-column:2;grid-row:1;text-align:end}
+  td.c-phone,td.c-seats,td.c-time,td.c-lang,td.c-count{font-size:13px;color:var(--soft)}
+  td.c-phone{grid-column:1} td.c-seats{grid-column:2;text-align:end}
+  td.c-act{grid-column:1/3}
+  .row-act{justify-content:flex-start}
+  .row-act .btn{flex:1}
 }
 .foot{text-align:center;color:var(--soft);font-size:12px;margin-top:14px}
+dialog{margin:auto;border:0;border-radius:16px;padding:0;width:min(640px,94vw);max-height:90vh;background:var(--paper);color:var(--ink);box-shadow:0 30px 80px -20px rgba(40,30,20,.5)}
+dialog::backdrop{background:rgba(50,40,30,.45);backdrop-filter:blur(2px)}
+.dlg{padding:20px 20px 16px;display:flex;flex-direction:column;gap:12px}
+.dlg h2{font-family:Amiri,serif;font-size:24px;color:var(--gold-d)}
+.dlg .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dlg label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--soft)}
+.dlg .btns{display:flex;gap:8px;justify-content:flex-start;margin-top:4px;flex-wrap:wrap}
+.drop{border:2px dashed var(--line);border-radius:12px;padding:26px 14px;text-align:center!important;align-items:center;color:var(--soft);cursor:pointer;background:#fffdf9;transition:background .2s}
+.drop.over{background:#f3ecdf}
+.drop b{display:block;color:var(--gold-d);font-size:16px}
+.preview{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:10px}
+.preview table{font-size:13px}
+.preview td,.preview th{padding:6px 8px}
+.preview tr{display:table-row!important}
+.preview td,.preview th{display:table-cell!important}
+.preview thead{display:table-header-group!important}
+.preview tbody{display:table-row-group!important}
+.preview table{display:table!important}
+.preview tr.bad td{color:var(--no);text-decoration:line-through}
+.note{font-size:13px;color:var(--soft);line-height:1.8}
+.note code{background:#efe7da;padding:0 6px;border-radius:5px;font-size:12.5px}
+.toast{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,30px);background:#3e3228;color:#fff;padding:10px 18px;border-radius:30px;font-size:14px;opacity:0;transition:.3s;z-index:99;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- login -->
   <form class="panel login" id="login">
     <h1>عدي & أسماء</h1>
-    <p>لوحة متابعة ردود الضيوف</p>
+    <p>لوحة التحكم بالدعوات والردود</p>
     <input type="password" id="pw" placeholder="كلمة السر" autocomplete="current-password" required>
     <button class="btn" id="login-btn">دخول</button>
     <p class="err" id="login-err"></p>
   </form>
 
-  <!-- dashboard -->
   <div id="dash" hidden>
     <header>
-      <h1>ردود الضيوف</h1>
+      <h1>لوحة التحكم</h1>
       <p id="updated">—</p>
     </header>
 
-    <div class="stats">
-      <div class="panel stat"><b id="s-guests">0</b><span>إجمالي الحاضرين</span></div>
-      <div class="panel stat yes"><b id="s-yes">0</b><span>ردود تأكيد</span></div>
-      <div class="panel stat no"><b id="s-no">0</b><span>اعتذارات</span></div>
-      <div class="panel stat"><b id="s-all">0</b><span>كل الردود</span></div>
-    </div>
+    <nav class="tabs" id="tabs">
+      <button data-tab="guests" class="on">المدعوون<i id="t-guests"></i></button>
+      <button data-tab="replies">الردود<i id="t-replies"></i></button>
+    </nav>
 
-    <div class="panel toolbar">
-      <input type="search" id="q" placeholder="بحث بالاسم…">
-      <div class="seg" id="filter">
-        <button data-f="all" class="on">الكل</button>
-        <button data-f="yes">سيحضر</button>
-        <button data-f="no">معتذر</button>
+    <!-- ===== guest list ===== -->
+    <section id="tab-guests">
+      <div class="stats" id="g-stats">
+        <div class="panel stat" data-f="all"><b id="g-all">0</b><span>المدعوون</span><small id="g-seats">0 مقعد</small></div>
+        <div class="panel stat s-new" data-f="new"><b id="g-new">0</b><span>لم تُرسل</span></div>
+        <div class="panel stat s-sent" data-f="sent"><b id="g-sent">0</b><span>أُرسلت</span><small>لم تُفتح بعد</small></div>
+        <div class="panel stat s-open" data-f="open"><b id="g-open">0</b><span>فتح الدعوة</span><small>بانتظار الرد</small></div>
+        <div class="panel stat s-yes" data-f="yes"><b id="g-yes">0</b><span>مؤكد</span><small id="g-yes-p">0 شخص</small></div>
+        <div class="panel stat s-no" data-f="no"><b id="g-no">0</b><span>اعتذر</span></div>
       </div>
-      <div class="actions">
-        <button class="btn ghost" id="refresh">تحديث</button>
-        <button class="btn" id="csv">تحميل Excel</button>
-        <a class="btn ghost" id="sheet" target="_blank" rel="noopener" hidden>فتح Google Sheet</a>
-      </div>
-    </div>
+      <div class="bar" id="g-bar"></div>
 
-    <div class="panel list">
-      <table>
-        <thead><tr><th>الاسم</th><th>الحالة</th><th>العدد</th><th>اللغة</th><th>آخر تحديث</th><th></th></tr></thead>
-        <tbody id="rows"></tbody>
-      </table>
-      <div class="empty" id="empty" hidden>لا توجد ردود بعد</div>
-    </div>
-    <p class="foot">تتحدث القائمة تلقائياً كل دقيقة · <a href="#" id="logout" style="color:inherit">تسجيل الخروج</a></p>
+      <div class="panel next" id="next" hidden>
+        <p id="next-txt"></p>
+        <button class="btn wa" id="next-btn"></button>
+      </div>
+
+      <div class="panel toolbar">
+        <input type="search" id="gq" placeholder="بحث بالاسم أو الرقم أو الجهة…">
+        <div class="seg" id="g-filter">
+          <button data-f="all" class="on">الكل</button>
+          <button data-f="new">لم تُرسل</button>
+          <button data-f="sent">أُرسلت</button>
+          <button data-f="open">فتح الدعوة</button>
+          <button data-f="wait">لم يرد</button>
+          <button data-f="yes">مؤكد</button>
+          <button data-f="no">اعتذر</button>
+        </div>
+        <div class="actions">
+          <button class="btn" id="imp-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>استيراد Excel</button>
+          <button class="btn ghost" id="add-btn">+ إضافة مدعو</button>
+          <button class="btn ghost" id="tpl-btn">نص الرسالة</button>
+          <button class="btn ghost" id="g-csv">تصدير</button>
+        </div>
+      </div>
+
+      <div class="panel list">
+        <table>
+          <thead><tr><th>الاسم</th><th>الجوال</th><th>المقاعد</th><th>الحالة</th><th></th></tr></thead>
+          <tbody id="g-rows"></tbody>
+        </table>
+        <div class="empty" id="g-empty" hidden></div>
+      </div>
+    </section>
+
+    <!-- ===== replies ===== -->
+    <section id="tab-replies" hidden>
+      <div class="stats four">
+        <div class="panel stat"><b id="s-guests">0</b><span>إجمالي الحاضرين</span></div>
+        <div class="panel stat s-yes"><b id="s-yes">0</b><span>ردود تأكيد</span></div>
+        <div class="panel stat s-no"><b id="s-no">0</b><span>اعتذارات</span></div>
+        <div class="panel stat"><b id="s-all">0</b><span>كل الردود</span></div>
+      </div>
+      <div class="panel toolbar">
+        <input type="search" id="q" placeholder="بحث بالاسم…">
+        <div class="seg" id="filter">
+          <button data-f="all" class="on">الكل</button>
+          <button data-f="yes">سيحضر</button>
+          <button data-f="no">معتذر</button>
+          <button data-f="public">من الرابط العام</button>
+        </div>
+        <div class="actions">
+          <button class="btn" id="csv">تحميل Excel</button>
+          <a class="btn ghost" id="sheet" target="_blank" rel="noopener" hidden>فتح Google Sheet</a>
+        </div>
+      </div>
+      <div class="panel list">
+        <table>
+          <thead><tr><th>الاسم</th><th>الحالة</th><th>العدد</th><th>اللغة</th><th>آخر تحديث</th><th></th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="empty" hidden>لا توجد ردود بعد</div>
+      </div>
+    </section>
+
+    <p class="foot">تتحدث اللوحة تلقائياً كل دقيقة · <a href="#" id="refresh" style="color:inherit">تحديث الآن</a> · <a href="#" id="logout" style="color:inherit">تسجيل الخروج</a></p>
   </div>
 </div>
+
+<!-- import -->
+<dialog id="imp">
+  <form class="dlg" method="dialog" id="imp-form">
+    <h2>استيراد قائمة المدعوين</h2>
+    <label class="drop" id="drop"><input type="file" id="file" accept=".xlsx,.xls,.csv,.ods" hidden>
+      <b>اختر ملف Excel أو اسحبه هنا</b>
+      <span>xlsx · xls · csv</span></label>
+    <p class="note">الأعمدة: <code>الاسم</code> <code>رقم الجوال</code> <code>العدد</code> — واختيارياً <code>اللغة</code> (عربي / تركي) و <code>الجهة</code>.
+      الأرقام بأي صيغة (05xx… أو ‎+90…) وتُوحَّد تلقائياً. <a href="#" id="tpl-dl" style="color:var(--gold-d)">تحميل ملف نموذج</a></p>
+    <div id="imp-prev" hidden>
+      <p class="note" id="imp-sum"></p>
+      <div class="preview"><table><thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>العدد</th><th>اللغة</th><th>الجهة</th></tr></thead><tbody id="imp-rows"></tbody></table></div>
+      <label style="margin-top:10px">اللغة للصفوف التي بلا لغة
+        <select id="imp-lang"><option value="ar">عربي</option><option value="tr">تركي</option></select></label>
+    </div>
+    <p class="err" id="imp-err"></p>
+    <div class="btns">
+      <button class="btn" id="imp-go" value="go" disabled>إضافة</button>
+      <button class="btn ghost" value="cancel" formnovalidate>إلغاء</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- add / edit -->
+<dialog id="ed">
+  <form class="dlg" method="dialog" id="ed-form">
+    <h2 id="ed-title">إضافة مدعو</h2>
+    <label>الاسم كما يظهر في الدعوة<input id="ed-name" maxlength="80" required placeholder="مثال: عائلة أحمد الخطيب"></label>
+    <div class="row">
+      <label>رقم الجوال (واتساب)<input id="ed-phone" inputmode="tel" dir="ltr" placeholder="+90 5xx xxx xx xx"></label>
+      <label>العدد المسموح<input id="ed-allowed" type="number" min="1" max="30" value="2" required></label>
+    </div>
+    <div class="row">
+      <label>اللغة<select id="ed-lang"><option value="ar">عربي</option><option value="tr">تركي</option></select></label>
+      <label>الجهة (اختياري)<input id="ed-group" maxlength="40" placeholder="أهل العريس / أهل العروس…"></label>
+    </div>
+    <p class="err" id="ed-err"></p>
+    <div class="btns">
+      <button class="btn" value="save">حفظ</button>
+      <button class="btn ghost" value="cancel" formnovalidate>إلغاء</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- message templates -->
+<dialog id="tpl">
+  <form class="dlg" method="dialog" id="tpl-form">
+    <h2>نص رسالة واتساب</h2>
+    <div class="seg" id="tpl-seg" style="align-self:flex-start">
+      <button type="button" data-k="ar" class="on">دعوة · عربي</button>
+      <button type="button" data-k="tr">دعوة · تركي</button>
+      <button type="button" data-k="ar_r">تذكير · عربي</button>
+      <button type="button" data-k="tr_r">تذكير · تركي</button>
+    </div>
+    <textarea id="tpl-text"></textarea>
+    <p class="note">تُستبدل تلقائياً: <code>{الاسم}</code> اسم المدعو · <code>{العدد}</code> عدد المقاعد · <code>{الرابط}</code> رابط دعوته الخاصة.
+      يُرسل «التذكير» لمن وصلته الدعوة ولم يرد بعد.</p>
+    <div class="btns">
+      <button class="btn" value="save">حفظ</button>
+      <button class="btn ghost" type="button" id="tpl-reset">استعادة النص الأصلي</button>
+      <button class="btn ghost" value="cancel" formnovalidate>إغلاق</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- review / edit the message before WhatsApp opens -->
+<dialog id="snd">
+  <form class="dlg" method="dialog" id="snd-form">
+    <h2 id="snd-title">إرسال الدعوة</h2>
+    <p class="note" id="snd-to"></p>
+    <textarea id="snd-text"></textarea>
+    <label style="flex-direction:row;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="snd-save" style="width:auto"> احفظ هذا النص كنص افتراضي للرسائل القادمة</label>
+    <p class="note">يمكنك تعديل النص هنا، ثم يُفتح واتساب والرسالة جاهزة، وتضغط «إرسال» داخل واتساب.</p>
+    <div class="btns">
+      <button class="btn wa" value="send"><svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>فتح واتساب</button>
+      <button class="btn ghost" type="button" id="snd-copy">نسخ النص</button>
+      <button class="btn ghost" value="cancel" formnovalidate>إلغاء</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast"></div>
 
 <script src="config.js"></script>
 <script>
 const API = (window.SITE && window.SITE.rsvpEndpoint) || '';
-const $ = s => document.querySelector(s);
-let key = '', rows = [], filter = 'all', timer;
+const SITE_URL = new URL('./', location.href).href;
+const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
+let key = '', rows = [], guests = [], filter = 'all', gFilter = 'all', timer;
 const ss = { get(){ try{ return sessionStorage.getItem('adm') || ''; }catch(e){ return ''; } }, set(v){ try{ v ? sessionStorage.setItem('adm', v) : sessionStorage.removeItem('adm'); }catch(e){} } };
+const ls = { get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} } };
 const esc = s => String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fmt = iso => { const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleString('ar', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit', numberingSystem:'latn'}); };
+const fmt = iso => { const d = new Date(iso); return !iso || isNaN(d) ? '' : d.toLocaleString('ar', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit', numberingSystem:'latn'}); };
+const toast = m => { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(()=>t.classList.remove('show'), 2400); };
+const I = {
+  wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>',
+  copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>',
+  eye:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  edit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20h4L19 9l-4-4L4 16v4zM13.5 6.5l4 4"/></svg>',
+  del:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>'
+};
 
 if (window.SITE && window.SITE.sheetUrl) { $('#sheet').href = window.SITE.sheetUrl; $('#sheet').hidden = false; }
 
@@ -136,37 +332,314 @@ async function call(body){
   if(!API) throw new Error('لم يتم ضبط رابط السيرفر في config.js بعد');
   const r = await fetch(API, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({...body, key})});
   const j = await r.json();
-  if(!j.ok) throw new Error(j.error === 'auth' ? 'كلمة السر غير صحيحة' : 'حدث خطأ، حاول مرة أخرى');
+  if(!j.ok) throw new Error(j.error === 'auth' ? 'كلمة السر غير صحيحة' : j.error === 'unknown_action' ? 'يجب تحديث نسخة السيرفر (Apps Script) أولاً' : 'حدث خطأ، حاول مرة أخرى');
   return j;
 }
 
 async function load(){
-  $('#refresh').disabled = true;
-  try{
-    const j = await call({action:'list'});
-    rows = j.rows.sort((a,b)=> new Date(b.updated) - new Date(a.updated));
-    render();
-    $('#updated').textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString('ar', {hour:'2-digit', minute:'2-digit', numberingSystem:'latn'});
-    return true;
-  } finally { $('#refresh').disabled = false; }
+  const j = await call({action:'guests'});
+  guests = j.guests || []; rows = (j.rows || []).sort((a,b)=> new Date(b.updated) - new Date(a.updated));
+  render();
+  $('#updated').textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString('ar', {hour:'2-digit', minute:'2-digit', numberingSystem:'latn'});
+  return true;
+}
+function render(){ renderGuests(); renderReplies(); $('#t-guests').textContent = guests.length ? '(' + guests.length + ')' : ''; $('#t-replies').textContent = rows.length ? '(' + rows.length + ')' : ''; }
+
+/* ---------- guest status: لم تُرسل → أُرسلت → فتح الدعوة → مؤكد / اعتذر ---------- */
+const ST = { new:'لم تُرسل', sent:'أُرسلت', open:'فتح الدعوة', yes:'مؤكد', no:'اعتذر' };
+function enrich(g){
+  const r = rows.find(x => x.guest === g.code);
+  g.reply = r || null;
+  g.status = r ? (r.attending ? 'yes' : 'no') : g.opened ? 'open' : g.sent ? 'sent' : 'new';
+  return g;
+}
+function detail(g){
+  if(g.reply) return (g.reply.attending ? 'أكّد ' : 'اعتذر ') + fmt(g.reply.updated);
+  if(g.opened) return 'فتحها ' + (g.opens > 1 ? g.opens + ' مرات · آخرها ' : '') + fmt(g.lastOpen || g.opened);
+  if(g.sent) return 'أُرسلت ' + fmt(g.sent) + (g.sends > 1 ? ' · ' + g.sends + ' مرات' : '');
+  return '';
+}
+const link = g => SITE_URL + '?g=' + g.code;
+const seatsAr = n => n == 1 ? 'شخص واحد' : n == 2 ? 'شخصين' : n <= 10 ? n + ' أشخاص' : n + ' شخصاً';
+const fmtPhone = p => p ? '+' + p : '';
+
+function renderGuests(){
+  guests.forEach(enrich);
+  const by = k => guests.filter(g => g.status === k);
+  const yes = by('yes');
+  $('#g-all').textContent = guests.length;
+  $('#g-seats').textContent = guests.reduce((n,g)=>n + g.allowed, 0) + ' مقعد مسموح';
+  ['new','sent','open','yes','no'].forEach(k => $('#g-' + k).textContent = by(k).length);
+  $('#g-yes-p').textContent = yes.reduce((n,g)=>n + (g.reply ? g.reply.count : 0), 0) + ' شخص';
+  const tot = guests.length || 1;
+  $('#g-bar').innerHTML = ['yes','no','open','sent','new'].map(k => `<i class="${k}" style="width:${by(k).length / tot * 100}%" title="${ST[k]}: ${by(k).length}"></i>`).join('');
+  $$('#g-stats .stat').forEach(s => s.classList.toggle('on', s.dataset.f === gFilter && gFilter !== 'all'));
+
+  const q = $('#gq').value.trim().toLowerCase();
+  const view = guests.filter(g => (gFilter === 'all' || g.status === gFilter || (gFilter === 'wait' && (g.status === 'sent' || g.status === 'open')))
+    && (!q || (g.name + ' ' + g.phone + ' ' + g.group + ' ' + g.code).toLowerCase().includes(q)));
+  $('#g-rows').innerHTML = view.map(g => {
+    const remind = g.status === 'sent' || g.status === 'open';
+    const wa = g.status === 'new' ? 'إرسال' : remind ? 'تذكير' : 'رسالة';
+    return `<tr data-code="${g.code}">
+    <td class="c-name"><span class="nm">${esc(g.name)}</span>${g.group ? `<span class="grp">${esc(g.group)}</span>` : ''}<span class="code">${g.code}</span>
+      <div class="muted">${g.lang === 'tr' ? 'تركي' : 'عربي'}${detail(g) ? ' · ' + detail(g) : ''}</div></td>
+    <td class="c-phone"><span class="phone">${esc(fmtPhone(g.phone)) || '<span class="muted">بدون رقم</span>'}</span></td>
+    <td class="c-seats seats">${g.reply && g.reply.attending ? `<b>${g.reply.count}</b> <span class="muted">من ${g.allowed}</span>` : `<b>${g.allowed}</b> <span class="muted">مسموح</span>`}</td>
+    <td class="c-status"><span class="tag ${g.status}">${ST[g.status]}</span></td>
+    <td class="c-act"><div class="row-act">
+      <button class="btn wa ${remind ? 'remind' : ''}" data-a="wa">${I.wa}${wa}</button>
+      <button class="ic" data-a="copy" title="نسخ الرابط">${I.copy}</button>
+      <a class="ic" href="${link(g)}&preview=1" target="_blank" rel="noopener" title="معاينة الدعوة">${I.eye}</a>
+      <button class="ic" data-a="edit" title="تعديل">${I.edit}</button>
+      <button class="ic del" data-a="del" title="حذف">${I.del}</button></div></td></tr>`;
+  }).join('');
+  const e = $('#g-empty');
+  e.hidden = view.length > 0;
+  e.innerHTML = guests.length ? 'لا توجد نتائج' : 'لم تُضف قائمة المدعوين بعد<br><span class="muted">استورد ملف Excel فيه الاسم ورقم الجوال والعدد، وسيحصل كل مدعو على رابط دعوة خاص به</span>';
+  // send one after another
+  const nxt = guests.find(g => g.status === 'new');
+  $('#next').hidden = !nxt;
+  if(nxt){ $('#next-txt').innerHTML = `باقي <b>${by('new').length}</b> دعوة لم تُرسل · التالي: <b>${esc(nxt.name)}</b>`; $('#next-btn').innerHTML = I.wa + 'إرسال للتالي'; $('#next-btn').dataset.code = nxt.code; }
 }
 
-function render(){
+/* ---------- WhatsApp ---------- */
+const DEF = {
+  ar: `السلام عليكم {الاسم} 🤍
+
+بفضل من الله ورعايته، نتشرّف بدعوتكم لحضور حفل زفاف
+*عدي & أسماء*
+وتناول وجبة العشاء
+
+📅 الخميس 10/12/2026 – الساعة 7:00 مساءً
+📍 قاعة إنجي للأفراح – Başakşehir / İstanbul
+👥 الدعوة لـ {العدد}
+
+دعوتكم الخاصة وتأكيد الحضور من هنا:
+{الرابط}`,
+  tr: `Sayın {الاسم} 🤍
+
+Oday & Asmaa'nın düğün törenine ve akşam yemeğine sizleri davet etmekten onur duyarız.
+
+📅 Perşembe, 10 Aralık 2026 – 19:00
+📍 İnci Düğün Salonu – Başakşehir / İstanbul
+👥 Davetiye {العدد} kişiliktir
+
+Size özel davetiyeniz ve katılım onayı için:
+{الرابط}`,
+  ar_r: `السلام عليكم {الاسم} 🤍
+نذكّركم بدعوتكم لحفل زفاف *عدي & أسماء* يوم الخميس 10/12/2026 الساعة 7:00 مساءً.
+نرجو تأكيد حضوركم من رابط دعوتكم الخاصة:
+{الرابط}`,
+  tr_r: `Sayın {الاسم} 🤍
+*Oday & Asmaa*'nın 10 Aralık 2026 Perşembe 19:00'daki düğününü hatırlatmak isteriz.
+Lütfen katılım durumunuzu size özel davetiyenizden bildirin:
+{الرابط}`
+};
+const tpl = () => Object.assign({}, DEF, ls.get('adm_tpl') || {});
+function message(g){
+  const k = g.lang + ((g.status === 'sent' || g.status === 'open') ? '_r' : '');
+  return tpl()[k].replaceAll('{الاسم}', g.name).replaceAll('{العدد}', g.lang === 'tr' ? g.allowed : seatsAr(g.allowed)).replaceAll('{الرابط}', link(g));
+}
+let sending = null;
+function sendWa(g){
+  sending = g;
+  const remind = g.status === 'sent' || g.status === 'open';
+  $('#snd-title').textContent = (remind ? 'تذكير ' : g.status === 'new' ? 'إرسال الدعوة إلى ' : 'رسالة إلى ') + g.name;
+  $('#snd-to').innerHTML = g.phone ? 'إلى واتساب: <span class="phone">' + esc(fmtPhone(g.phone)) + '</span>' : 'لا يوجد رقم — ستختار جهة الاتصال داخل واتساب';
+  $('#snd-text').value = message(g); $('#snd-save').checked = false;
+  $('#snd').showModal();
+}
+$('#snd-copy').addEventListener('click', async () => { try{ await navigator.clipboard.writeText($('#snd-text').value); toast('تم نسخ النص'); }catch(e){} });
+$('#snd-form').addEventListener('submit', e => {
+  if(!e.submitter || e.submitter.value !== 'send' || !sending) return;
+  const g = sending, text = $('#snd-text').value;
+  if($('#snd-save').checked){
+    // store as the default template: put the placeholders back
+    const k = g.lang + ((g.status === 'sent' || g.status === 'open') ? '_r' : '');
+    const t = text.split(link(g)).join('{الرابط}').split(g.name).join('{الاسم}');
+    ls.set('adm_tpl', Object.assign(tpl(), {[k]: t}));
+  }
+  openWa(g, text);
+});
+function openWa(g, text){
+  const url = (g.phone ? 'https://wa.me/' + g.phone : 'https://wa.me/') + '?text=' + encodeURIComponent(text);
+  window.open(url, '_blank', 'noopener');
+  const was = g.status;
+  g.sent = new Date().toISOString(); g.sends = (g.sends || 0) + 1; render(); flash(g.code);
+  call({action:'markSent', code:g.code}).catch(()=>toast('تعذّر حفظ حالة الإرسال'));
+  toast(was === 'new' ? 'سُجّلت دعوة «' + g.name + '» كمُرسَلة' : 'تم فتح واتساب لـ «' + g.name + '»');
+}
+function flash(code){ const tr = document.querySelector(`#g-rows tr[data-code="${code}"]`); if(tr){ tr.classList.remove('flash'); void tr.offsetWidth; tr.classList.add('flash'); } }
+
+$('#g-rows').addEventListener('click', async e => {
+  const b = e.target.closest('[data-a]'); if(!b) return;
+  const g = guests.find(x => x.code === b.closest('tr').dataset.code); if(!g) return;
+  const a = b.dataset.a;
+  if(a === 'wa') sendWa(g);
+  if(a === 'copy'){ try{ await navigator.clipboard.writeText(link(g)); toast('تم نسخ رابط ' + g.name); }catch(err){ prompt('انسخ الرابط:', link(g)); } }
+  if(a === 'edit') openEdit(g);
+  if(a === 'del'){
+    if(!confirm('حذف «' + g.name + '» من قائمة المدعوين؟' + (g.reply ? '\n(رده المسجّل يبقى في تبويب الردود)' : ''))) return;
+    try{ await call({action:'deleteGuest', code:g.code}); guests = guests.filter(x => x !== g); render(); toast('تم الحذف'); }catch(err){ alert(err.message); }
+  }
+});
+$('#next-btn').addEventListener('click', e => { const g = guests.find(x => x.code === e.currentTarget.dataset.code); if(g) sendWa(g); });
+$('#g-stats').addEventListener('click', e => { const s = e.target.closest('.stat'); if(!s) return; setGFilter(gFilter === s.dataset.f ? 'all' : s.dataset.f); });
+$('#g-filter').addEventListener('click', e => { const b = e.target.closest('button'); if(b) setGFilter(b.dataset.f); });
+function setGFilter(f){ gFilter = f; $$('#g-filter button').forEach(x => x.classList.toggle('on', x.dataset.f === f)); renderGuests(); }
+$('#gq').addEventListener('input', renderGuests);
+
+/* ---------- add / edit ---------- */
+let editing = null;
+function openEdit(g){
+  editing = g || null;
+  $('#ed-title').textContent = g ? 'تعديل مدعو' : 'إضافة مدعو';
+  $('#ed-name').value = g ? g.name : ''; $('#ed-phone').value = g ? fmtPhone(g.phone) : '';
+  $('#ed-allowed').value = g ? g.allowed : 2; $('#ed-lang').value = g ? g.lang : 'ar'; $('#ed-group').value = g ? g.group : '';
+  $('#ed-err').textContent = ''; $('#ed').showModal();
+}
+$('#add-btn').addEventListener('click', () => openEdit(null));
+$('#ed-form').addEventListener('submit', async e => {
+  if(e.submitter && e.submitter.value === 'cancel') return;
+  e.preventDefault();
+  const guest = { name:$('#ed-name').value.trim(), phone:$('#ed-phone').value, allowed:+$('#ed-allowed').value || 1, lang:$('#ed-lang').value, group:$('#ed-group').value.trim() };
+  if(!guest.name) return;
+  try{
+    if(editing) await call({action:'updateGuest', code:editing.code, guest});
+    else { const j = await call({action:'importGuests', guests:[guest]}); if(!j.added) throw new Error('هذا الاسم أو الرقم موجود مسبقاً في القائمة'); }
+    $('#ed').close(); await load(); toast(editing ? 'تم الحفظ' : 'تمت الإضافة');
+  }catch(err){ $('#ed-err').textContent = err.message; }
+});
+
+/* ---------- Excel import ---------- */
+let XLSXp = null, parsed = [];
+const loadXLSX = () => XLSXp || (XLSXp = new Promise((ok, no) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'; s.onload = () => ok(window.XLSX); s.onerror = () => { XLSXp = null; no(new Error('تعذّر تحميل قارئ Excel، تحقق من الإنترنت')); }; document.head.append(s); }));
+const COLS = {
+  name:['الاسم','اسم','name','isim','ad soyad','adı','المدعو','العائلة'],
+  phone:['جوال','الجوال','موبايل','هاتف','رقم','واتس','phone','mobile','tel','telefon','whatsapp','gsm','numara'],
+  allowed:['العدد','عدد','المقاعد','الأشخاص','count','seats','allowed','guests','kişi','sayı','adet'],
+  lang:['اللغة','لغة','lang','language','dil'],
+  group:['الجهة','جهة','المجموعة','مجموعة','ملاحظة','group','taraf','grup','not']
+};
+const normH = s => String(s || '').trim().toLowerCase().replace(/[ً-ْ]/g,'');
+function mapCols(head){
+  const m = {};
+  head.forEach((h, i) => { const n = normH(h); if(!n) return;
+    for(const k in COLS) if(m[k] == null && COLS[k].some(w => n === w || n.includes(w))) { m[k] = i; break; } });
+  return m;
+}
+const toLang = (v, d) => { const s = normH(v); if(!s) return d; return /^(tr|turk|türk|تر)/.test(s) ? 'tr' : /^(ar|عر|arap)/.test(s) ? 'ar' : d; };
+const digits = v => String(v == null ? '' : v).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+function normPhone(v){
+  let p = digits(v).replace(/[^\d]/g, '');
+  if(p.startsWith('00')) p = p.slice(2);
+  if(/^05\d{9}$/.test(p)) p = '9' + p; else if(/^5\d{9}$/.test(p)) p = '90' + p;
+  return p;
+}
+async function readFile(f){
+  $('#imp-err').textContent = ''; $('#imp-go').disabled = true;
+  try{
+    const X = await loadXLSX();
+    const wb = X.read(await f.arrayBuffer(), {type:'array'});
+    const aoa = X.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header:1, raw:false, defval:''}).filter(r => r.some(c => String(c).trim()));
+    if(!aoa.length) throw new Error('الملف فارغ');
+    let m = mapCols(aoa[0]), body = aoa.slice(1);
+    if(m.name == null){ m = {name:0, phone:1, allowed:2, lang:3, group:4}; body = aoa; }   // no header row: assume the standard order
+    parsed = body.map(r => ({ name:String(r[m.name] ?? '').trim(), phone:normPhone(m.phone != null ? r[m.phone] : ''),
+      allowed: Math.max(1, Math.min(30, parseInt(digits(m.allowed != null ? r[m.allowed] : ''), 10) || 1)),
+      langRaw: m.lang != null ? r[m.lang] : '', group: m.group != null ? String(r[m.group]).trim() : '' })).filter(g => g.name);
+    if(!parsed.length) throw new Error('لم أجد أسماء في الملف');
+    showPreview();
+  }catch(err){ $('#imp-err').textContent = err.message || 'تعذّرت قراءة الملف'; $('#imp-prev').hidden = true; }
+}
+function showPreview(){
+  const d = $('#imp-lang').value;
+  parsed.forEach(g => g.lang = toLang(g.langRaw, d));
+  const have = new Set(guests.flatMap(g => [g.phone && 'p' + g.phone, 'n' + g.name.trim()]).filter(Boolean));
+  parsed.forEach(g => { g.dup = (g.phone && have.has('p' + g.phone)) || have.has('n' + g.name); if(g.phone) have.add('p' + g.phone); have.add('n' + g.name); });
+  const ok = parsed.filter(g => !g.dup), noPhone = ok.filter(g => !g.phone).length, dup = parsed.length - ok.length;
+  $('#imp-sum').innerHTML = `وُجد <b>${parsed.length}</b> اسم · <b>${ok.reduce((n,g)=>n + g.allowed, 0)}</b> مقعد` +
+    (dup ? ` · <span style="color:var(--no)">${dup} مكرر أو موجود مسبقاً (سيُتجاهل)</span>` : '') + (noPhone ? ` · ${noPhone} بدون رقم جوال` : '');
+  $('#imp-rows').innerHTML = parsed.slice(0, 300).map((g, i) => `<tr class="${g.dup ? 'bad' : ''}"><td>${i + 1}</td><td>${esc(g.name)}</td><td class="phone">${esc(fmtPhone(g.phone)) || '—'}</td><td>${g.allowed}</td><td>${g.lang === 'tr' ? 'تركي' : 'عربي'}</td><td>${esc(g.group)}</td></tr>`).join('');
+  $('#imp-prev').hidden = false; $('#imp-go').disabled = !ok.length;
+  $('#imp-go').textContent = ok.length ? 'إضافة ' + ok.length + ' مدعو' : 'لا يوجد جديد';
+}
+$('#imp-btn').addEventListener('click', () => { parsed = []; $('#file').value = ''; $('#imp-prev').hidden = true; $('#imp-err').textContent = ''; $('#imp-go').disabled = true; $('#imp-go').textContent = 'إضافة'; $('#imp').showModal(); loadXLSX().catch(()=>{}); });
+$('#file').addEventListener('change', e => e.target.files[0] && readFile(e.target.files[0]));
+$('#imp-lang').addEventListener('change', () => parsed.length && showPreview());
+const drop = $('#drop');
+['dragenter','dragover'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add('over'); }));
+['dragleave','drop'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove('over'); }));
+drop.addEventListener('drop', e => e.dataTransfer.files[0] && readFile(e.dataTransfer.files[0]));
+$('#imp-form').addEventListener('submit', async e => {
+  if(!e.submitter || e.submitter.value !== 'go') return;
+  e.preventDefault();
+  const list = parsed.filter(g => !g.dup).map(({name, phone, allowed, lang, group}) => ({name, phone, allowed, lang, group}));
+  $('#imp-go').disabled = true; $('#imp-go').textContent = 'جارٍ الإضافة…';
+  try{
+    let added = 0, skipped = 0;
+    for(let i = 0; i < list.length; i += 300){ const j = await call({action:'importGuests', guests:list.slice(i, i + 300)}); added += j.added; skipped += j.skipped; }
+    $('#imp').close(); setGFilter('all'); await load();
+    toast('أُضيف ' + added + ' مدعو' + (skipped ? ' · تُجوهل ' + skipped : ''));
+  }catch(err){ $('#imp-err').textContent = err.message; $('#imp-go').disabled = false; $('#imp-go').textContent = 'إعادة المحاولة'; }
+});
+$('#tpl-dl').addEventListener('click', async e => {
+  e.preventDefault();
+  const data = [['الاسم','رقم الجوال','العدد','اللغة','الجهة'], ['عائلة أحمد الخطيب','05321234567',4,'عربي','أهل العريس'], ['Mehmet Yılmaz ailesi','+90 532 765 43 21',2,'تركي','أهل العروس'], ['السيد خالد العمر','',1,'عربي','']];
+  try{
+    const X = await loadXLSX(); const ws = X.utils.aoa_to_sheet(data); ws['!cols'] = [{wch:28},{wch:18},{wch:8},{wch:8},{wch:16}];
+    const wb = X.utils.book_new(); X.utils.book_append_sheet(wb, ws, 'المدعوون'); X.writeFile(wb, 'نموذج-قائمة-المدعوين.xlsx');
+  }catch(err){ download('نموذج-قائمة-المدعوين.csv', data); }
+});
+
+/* ---------- message templates ---------- */
+let tk = 'ar', draft = {};
+$('#tpl-btn').addEventListener('click', () => { draft = tpl(); tk = 'ar'; $$('#tpl-seg button').forEach(b => b.classList.toggle('on', b.dataset.k === tk)); $('#tpl-text').value = draft[tk]; $('#tpl').showModal(); });
+$('#tpl-seg').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return; draft[tk] = $('#tpl-text').value; tk = b.dataset.k; $$('#tpl-seg button').forEach(x => x.classList.toggle('on', x === b)); $('#tpl-text').value = draft[tk]; });
+$('#tpl-reset').addEventListener('click', () => { $('#tpl-text').value = DEF[tk]; });
+$('#tpl-form').addEventListener('submit', e => { if(e.submitter && e.submitter.value === 'save'){ draft[tk] = $('#tpl-text').value; ls.set('adm_tpl', draft); toast('تم حفظ نص الرسالة'); } });
+
+/* ---------- replies ---------- */
+function renderReplies(){
   const yes = rows.filter(r=>r.attending), no = rows.filter(r=>!r.attending);
   $('#s-guests').textContent = yes.reduce((n,r)=>n + r.count, 0);
   $('#s-yes').textContent = yes.length; $('#s-no').textContent = no.length; $('#s-all').textContent = rows.length;
   const q = $('#q').value.trim().toLowerCase();
-  const view = rows.filter(r => (filter==='all' || (filter==='yes') === r.attending) && (!q || r.name.toLowerCase().includes(q)));
+  const view = rows.filter(r => (filter==='all' || (filter==='public' ? !r.guest : (filter==='yes') === r.attending)) && (!q || r.name.toLowerCase().includes(q)));
   $('#rows').innerHTML = view.map(r => `<tr>
-    <td class="c-name">${esc(r.name)}${r.edits ? ` <span class="muted">(عُدّل ${r.edits})</span>` : ''}${r.code ? ` <span class="code">${esc(r.code)}</span>` : ''}</td>
+    <td class="c-name"><span class="nm">${esc(r.name)}</span>${r.code ? `<span class="code">${esc(r.code)}</span>` : ''}
+      <div class="muted">${r.guest ? 'من قائمة المدعوين' : 'من الرابط العام'}${r.edits ? ' · عُدّل ' + r.edits : ''}</div></td>
     <td class="c-status"><span class="tag ${r.attending?'yes':'no'}">${r.attending?'سيحضر':'معتذر'}</span></td>
     <td class="c-count">${r.attending ? r.count + ' <span class="muted">شخص</span>' : '—'}</td>
     <td class="c-lang">${esc(r.lang)}</td>
     <td class="c-time">${fmt(r.updated)}</td>
-    <td class="c-del"><button class="del" data-id="${esc(r.deviceId)}" title="حذف">×</button></td></tr>`).join('');
+    <td class="c-act"><div class="row-act"><button class="ic del" data-id="${esc(r.deviceId)}" title="حذف">${I.del}</button></div></td></tr>`).join('');
   $('#empty').hidden = view.length > 0;
 }
+$('#q').addEventListener('input', renderReplies);
+$('#filter').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return; filter = b.dataset.f; $$('#filter button').forEach(x=>x.classList.toggle('on', x===b)); renderReplies(); });
+$('#rows').addEventListener('click', async e => {
+  const b = e.target.closest('.del'); if(!b) return;
+  const r = rows.find(x=>x.deviceId === b.dataset.id);
+  if(!r || !confirm('حذف رد «' + r.name + '» نهائياً؟')) return;
+  try{ await call({action:'delete', deviceId:r.deviceId}); await load(); }catch(err){ alert(err.message); }
+});
 
+/* ---------- export ---------- */
+function download(name, data){
+  const q = v => '"' + String(v ?? '').replace(/"/g,'""') + '"';
+  const blob = new Blob(['﻿' + data.map(l=>l.map(q).join(',')).join('\r\n')], {type:'text/csv;charset=utf-8'});   // BOM so Excel shows Arabic correctly
+  const a = Object.assign(document.createElement('a'), {href:URL.createObjectURL(blob), download:name});
+  document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+}
+$('#csv').addEventListener('click', () => download('ردود-زفاف-عدي-وأسماء.csv',
+  [['الاسم','الحالة','عدد الحضور','اللغة','المصدر','آخر تحديث'], ...rows.map(r=>[r.name, r.attending?'سيحضر':'معتذر', r.count, r.lang, r.guest ? 'قائمة المدعوين' : 'الرابط العام', fmt(r.updated)])]));
+$('#g-csv').addEventListener('click', () => download('قائمة-المدعوين-عدي-وأسماء.csv',
+  [['الاسم','الجوال','العدد المسموح','الحضور المؤكد','الحالة','اللغة','الجهة','الرابط'], ...guests.map(g=>[g.name, fmtPhone(g.phone), g.allowed, g.reply && g.reply.attending ? g.reply.count : '', ST[g.status], g.lang === 'tr' ? 'تركي' : 'عربي', g.group, link(g)])]));
+
+/* ---------- session ---------- */
+$('#tabs').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return; const t = b.dataset.tab; $$('#tabs button').forEach(x=>x.classList.toggle('on', x===b)); $('#tab-guests').hidden = t !== 'guests'; $('#tab-replies').hidden = t !== 'replies'; });
 $('#login').addEventListener('submit', async e => {
   e.preventDefault();
   key = $('#pw').value; $('#login-err').textContent = ''; $('#login-btn').disabled = true;
@@ -174,28 +647,11 @@ $('#login').addEventListener('submit', async e => {
   catch(err){ $('#login-err').textContent = err.message; }
   finally{ $('#login-btn').disabled = false; }
 });
-function showDash(){ $('#login').hidden = true; $('#dash').hidden = false; clearInterval(timer); timer = setInterval(()=>load().catch(()=>{}), 60000); }
-
-$('#refresh').addEventListener('click', ()=>load().catch(err=>alert(err.message)));
-$('#q').addEventListener('input', render);
-$('#filter').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return; filter = b.dataset.f; document.querySelectorAll('#filter button').forEach(x=>x.classList.toggle('on', x===b)); render(); });
-$('#rows').addEventListener('click', async e => {
-  const b = e.target.closest('.del'); if(!b) return;
-  const r = rows.find(x=>x.deviceId === b.dataset.id);
-  if(!r || !confirm('حذف رد «' + r.name + '» نهائياً؟')) return;
-  try{ await call({action:'delete', deviceId:r.deviceId}); await load(); }catch(err){ alert(err.message); }
-});
-$('#csv').addEventListener('click', () => {
-  const head = ['الاسم','الحالة','عدد الحضور','اللغة','آخر تحديث'];
-  const q = v => '"' + String(v).replace(/"/g,'""') + '"';
-  const lines = [head, ...rows.map(r=>[r.name, r.attending?'سيحضر':'معتذر', r.count, r.lang, fmt(r.updated)])].map(l=>l.map(q).join(','));
-  const blob = new Blob(['﻿' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});   // BOM so Excel shows Arabic correctly
-  const a = Object.assign(document.createElement('a'), {href:URL.createObjectURL(blob), download:'ردود-زفاف-عدي-وأسماء.csv'});
-  document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
-});
+function showDash(){ $('#login').hidden = true; $('#dash').hidden = false; clearInterval(timer); timer = setInterval(()=>{ if(!document.hidden && !document.querySelector('dialog[open]')) load().catch(()=>{}); }, 60000); }
+$('#refresh').addEventListener('click', e => { e.preventDefault(); load().then(()=>toast('تم التحديث')).catch(err=>alert(err.message)); });
 $('#logout').addEventListener('click', e => { e.preventDefault(); ss.set(''); location.reload(); });
+document.addEventListener('visibilitychange', () => { if(!document.hidden && key && !$('#dash').hidden) load().catch(()=>{}); });
 
-// stay signed in for this browser tab
 (async()=>{ const saved = ss.get(); if(!saved) return; key = saved; try{ await load(); showDash(); }catch(e){ ss.set(''); } })();
 </script>
 </body>

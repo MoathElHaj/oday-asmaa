@@ -80,12 +80,15 @@ async function check(c){
   if(!j.found){
     res.classList.add('bad'); $('#badge').textContent = '✕'; $('#status').textContent = 'رقم الدعوة غير موجود';
     $('#name').textContent = ''; $('#count').textContent = '';
+  } else if(j.noReply){
+    res.classList.add('warn'); $('#badge').textContent = '?'; $('#status').textContent = 'مدعو، لكنه لم يؤكد الحضور';
+    $('#name').textContent = j.name; $('#count').textContent = 'العدد المسموح: ' + j.allowed;
   } else if(!j.attending){
     res.classList.add('warn'); $('#badge').textContent = '!'; $('#status').textContent = 'هذا الضيف سجّل اعتذاره';
     $('#name').textContent = j.name; $('#count').textContent = '';
   } else {
     res.classList.add('ok'); $('#badge').textContent = '✓'; $('#status').textContent = 'دعوة مؤكدة';
-    $('#name').textContent = j.name; $('#count').textContent = 'عدد الحضور: ' + j.count;
+    $('#name').textContent = j.name; $('#count').textContent = 'عدد الحضور: ' + j.count + (j.allowed ? ' من ' + j.allowed + ' مسموح' : '');
   }
   show('res');
 }
